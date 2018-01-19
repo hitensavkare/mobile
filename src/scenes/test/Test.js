@@ -10,9 +10,15 @@ class Test extends Component{
   render(){
     return(
       <View>
-        <Text>hello</Text>
+        <Text style={styles.text}>This is Examination Page for the User</Text>
       </View>
     )
   }
 }
+const styles =StyleSheet.create({
+  text:{
+  fontSize:16,
+  padding: 16
+}
+});
 export default Test;

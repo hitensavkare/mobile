@@ -4,6 +4,7 @@ import {Scene, Router} from 'react-native-router-flux';
 
 import Home from '../scenes/home'
 import Flash from '../scenes/flash'
+import MainScreen from '../scenes'
 class AppRoute extends Component{
   constructor(props){
     super(props);
@@ -20,7 +21,7 @@ class AppRoute extends Component{
   _introScreen(){
     return(
      <Scene key="root">
-       <Scene key='Home'  hideNavBar component={Home}/>
+       <Scene key='MainScreen'  hideNavBar component={MainScreen}/>
      </Scene>
    )
   }
