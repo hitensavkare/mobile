@@ -3,22 +3,38 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
+  TouchableOpacity
 } from 'react-native';
-
+import styles from './Test.styles'
+import {images} from '../../theme'
+import {Actions} from 'react-native-router-flux';
 class Test extends Component{
   render(){
     return(
-      <View>
-        <Text style={styles.text}>This is Examination Page for the User</Text>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={()=>{Actions.TestList()}} style={styles.rowContainer}>
+          <View style={styles.imageColumnContainer}>
+            <Image source={images.introTest} style={{height:40,width:40}}/>
+          </View>
+          <View style={styles.TextColumnContainer}>
+        <Text style={styles.textHeader}>Test Series</Text>
+          <Text style={styles.subText}>Contains questions set.</Text>
+      </View>
+    </TouchableOpacity>
+        <View style={styles.rowContainer}>
+          <View style={styles.imageColumnContainer}>
+            <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
+          </View>
+          <View style={styles.TextColumnContainer}>
+          <Text style={styles.textHeader}>Previous Papers</Text>
+          <Text style={styles.subText}>5+ years of previous papers</Text>
+        </View>
+        </View>
       </View>
     )
   }
 }
-const styles =StyleSheet.create({
-  text:{
-  fontSize:16,
-  padding: 16
-}
-});
+
 export default Test;

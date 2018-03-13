@@ -6,21 +6,16 @@ import {
   View,
   Image
 } from 'react-native';
-
+import Statusbar from '../components/Statusbar'
 import {TabNavigator} from 'react-navigation'
+import { Drawer } from 'native-base';
 import Test from './test'
 import Discuss from './discuss'
 import Home from './home'
 import CallAndAdmiCards from './cc'
-import Tabs from 'react-native-tabs';
-
-const icoDiscussActive=require('../assets/images/ic_clients_active.png')
-const icoDiscussInactive=require('../assets/images/ic_clients_inactive.png')
-const iconNotifyActive=require('../assets/images/ic_notif_active.png')
-const iconNotifyInActive=require('../assets/images/ic_notif_inactive.png')
-const iconOther_active=require('../assets/images/other_active.png')
-const iconOther_Inactive=require('../assets/images/other_inActive.png')
-
+import Tabs from 'react-native-tabs'
+import {images} from '../theme';
+import {MainHeader,DrawerView} from '../components'
 class MainScreen extends Component{
   constructor(props){
     super(props);
@@ -31,7 +26,7 @@ class MainScreen extends Component{
 
   _tabbedNavigation(){
     switch(this.state.page){
-      case 'home':return(<Home/>)
+      case 'home':return(<Home><Text>hello</Text></Home>)
       break;
       case 'discuss':return(<Discuss/>)
       break;
@@ -42,58 +37,80 @@ class MainScreen extends Component{
       default:
     }
   }
+  openDrawer(){
+    this.drawer._root.open()
+    //alert('hello')
+  }
+
+  closeDrawer(){
+    this.drawer._root.close()
+  }
 
   render(){
 
     return(
-      <View style={styles.container}>
-        <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
-          {this._tabbedNavigation()}
-        </View>
+      <Drawer
+        ref={(ref) => { this.drawer = ref; }}
+        onClose={() => this.closeDrawer()}
+        content={<DrawerView navigator={this.navigator} />}
+        >
+            <Statusbar/>
+          <View style={styles.container}>
+            <MainHeader
+              onPress={()=>{this.openDrawer()}}
+            />
+            <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
 
+              {this._tabbedNavigation()}
+            </View>
+            <View style={styles.footer}>
 
-          <View style={styles.footer}>
-                  <Tabs selected={this.state.page} style={styles.tabContainer}
-                    onSelect={el=>this.setState({page:el.props.name})}>
+              <Tabs selected={this.state.page} style={styles.tabContainer}
+                onSelect={el=>this.setState({page:el.props.name})}>
+                {this.state.page=='home'?<Image name='home' source={images.homeActive}
+                  style={styles.tabImage}/>:<Image name='home' source={images.homeInactive}
+                    style={styles.tabImage}/>}
+                    {this.state.page=='other'?<Image name='other' source={images.iconOther_active}
+                      style={styles.tabImageAdmitCard}/>:<Image name='other' source={images.iconOther_Inactive}
+                        style={styles.tabImageAdmitCard}/>}
 
-                    {this.state.page=='home'?<Image name='home' source={icoDiscussActive}
-                    style={styles.tabImage}/>:<Image name='home' source={icoDiscussInactive}
-                    style={styles.tabImage}/>}
-                    {this.state.page=='other'?<Image name='other' source={iconOther_active}
-                    style={styles.tabImage}/>:<Image name='other' source={iconOther_Inactive}
-                    style={styles.tabImage}/>}
-
-                    {this.state.page=='test'?<Image name='test' source={iconNotifyActive}
-                    style={styles.tabImage}/>:<Image name='test' source={iconNotifyInActive}
-                    style={styles.tabImage}/>}
-                    {this.state.page=='discuss'?<Image name='discuss' source={icoDiscussActive}
-                    style={styles.tabImage}/>:<Image name='discuss' source={icoDiscussInactive}
-                    style={styles.tabImage}/>}
-                    </Tabs>
-              </View>
-          </View>
-                    )
+                        {this.state.page=='test'?<Image name='test' source={images.iconNotifyActive}
+                          style={styles.tabImageAdmitCard}/>:<Image name='test' source={images.iconNotifyInActive}
+                            style={styles.tabImageAdmitCard}/>}
+                            {this.state.page=='discuss'?<Image name='discuss' source={images.icoDiscussActive}
+                              style={styles.tabImageAdmitCard}/>:<Image name='discuss' source={images.icoDiscussInactive}
+                                style={styles.tabImageAdmitCard}/>}
+                              </Tabs>
+                            </View>
+                          </View>
+                        </Drawer>
+                      )
+                    }
                   }
-                }
-                const styles =StyleSheet.create({
-                  container: {
-                    flex: 1,
-
-                  },
-
-                  tabContainer:{
-                    borderTopWidth:0.4,
-                    borderTopColor:'#b0bec5',
-                    height:56,
+                  const styles =StyleSheet.create({
+                    container: {
+                      flex: 1,
 
 
-                  },
-                  tabImage:{
-                    height:36,
-                    width:36,
-                  },
-                  viewFooter:{
+                    },
 
-                  }
-                });
-                export default MainScreen;
+                    tabContainer:{
+                      borderTopWidth:0.4,
+                      borderTopColor:'#BBDEFB',
+                      height:56,
+                      backgroundColor: 'white'
+                    },
+                    tabImage:{
+                      height:40,
+                      width:40,
+                    },
+                    tabImageAdmitCard:{
+                      height:30,
+                      width:30,
+                    },
+                    viewFooter:{
+
+
+                    }
+                  });
+                  export default MainScreen;
