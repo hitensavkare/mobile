@@ -82,5 +82,10 @@ imageIcon:{
   width: 32,
   marginRight:8,
   marginLeft:8,
+},
+//Style for Job Search
+searchContainer:{
+  flex:1,
+  backgroundColor: colors.white,
 }
 });

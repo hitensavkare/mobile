@@ -7,8 +7,11 @@ container:{
   marginTop: 24,
 },
 aptiSection:{
-marginTop: 16,
-
+marginTop: 8,
+marginBottom: 8,
+flex:1,
+justifyContent: 'center',
+alignItems:'flex-start',
 },
 sectionHeaderText:{
 ...bs.font.vac_headFont,

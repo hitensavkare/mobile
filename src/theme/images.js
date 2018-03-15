@@ -25,6 +25,10 @@ const images={
     iconPreviosePaper:require('../assets/images/pewviouspaper.gif'),
     iconClose:require('../assets/images/close.png'),
     iconGallary:require('../assets/images/gallery.png'),
-    iconCamera:require('../assets/images/camera.png')
+    iconCamera:require('../assets/images/camera.png'),
+
+    iconTestBack:require('../assets/images/arrow-left.gif'),
+    iconTestNext:require('../assets/images/arrow-right.gif'),
+    iconTime:require('../assets/images/timer.gif')
 };
 export default images;

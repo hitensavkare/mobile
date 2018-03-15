@@ -4,7 +4,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import {images} from '../theme';
 import styles from './ExamSectionDrawer.styles'
@@ -58,28 +60,36 @@ class ExamSectionDrawer extends Component{
       ]
     }
   }
+  _renderSummary(val){
+    return(
+      <View style={styles.aptiSection}>
+        <Text style={styles.sectionHeaderText}>
+          {val}
+        </Text>
+        <View style={styles.records}>
+          {this.state.json.map(vac_Card=>{
+            return(
+              <TouchableOpacity style={styles.singleQuesNum}>
+                <Text style={styles.numberText}>{vac_Card.id}</Text>
+              </TouchableOpacity>
+            )
+          })
+        }
+        </View>
+      </View>
+
+    )
+  }
   render(){
     return(
       <View style={styles.container}>
-        <View>
-        <View style={styles.aptiSection}>
-          <Text style={styles.sectionHeaderText}>
-            Aptitude
-          </Text>
-          <View style={styles.records}>
-            {this.state.json.map(vac_Card=>{
-              return(
-                <View style={styles.singleQuesNum}>
-                  <Text style={styles.numberText}>{vac_Card.id}</Text>
-                </View>
-              )
-            })
-          }
-          </View>
-
+        <View style={{flex:1}}>
+          <ScrollView>
+          {this._renderSummary('Aptitude')}
+          {this._renderSummary('Reasioning')}
+          {this._renderSummary('English')}
+          </ScrollView>
         </View>
-      
-      </View>
 
       </View>
 

@@ -8,14 +8,17 @@ class HeaderHome extends Component{
     return(
       <Header style={styles.header} androidStatusBarColor={colors.appColor}>
         <View style={styles.headerView}>
-          <TouchableOpacity onPress={this.props.onPress}>
+          <TouchableOpacity onPress={this.props.onPress} style={styles.leftButton}>
           <Image source={images.iconBack} style={styles.mdMenuColor}/>
         </TouchableOpacity>
+          <View style={styles.middleHead}>
           <Text style={styles.headerText}>
             {this.props.pageName}
           </Text>
-          <TouchableOpacity style={styles.rightButton}>
-            <Text style={styles.leftButton}>{this.props.rightButton}</Text>
+        </View>
+
+          <TouchableOpacity style={styles.rightButtonContainer}>
+            <Text style={styles.rightButton}>{this.props.rightButton}</Text>
           </TouchableOpacity>
         </View>
       </Header>
@@ -42,6 +45,24 @@ const styles=StyleSheet.create({
     fontFamily:appFonts.QuicksandBold,
     fontSize: 20,
     color: colors.appColor,
+  },
+  leftButton:{
+    flex:0.4
+  },
+  rightButtonContainer:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+  rightButton:{
+    fontFamily:appFonts.QuicksandBold,
+    fontSize: 16,
+    color: colors.appColor
+  },
+  middleHead:{
+    flex:2,
+    justifyContent: 'center',
+    alignItems: 'flex-start'//
   },
   mdMenuColor:{
     marginRight:'5%',
