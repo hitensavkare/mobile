@@ -5,8 +5,8 @@ export default StyleSheet.create({
     flex: 1,
     width:'100%',
     marginBottom:56,
-  },
-  rowContainer:{
+    },
+    rowContainer:{
     flexDirection: 'row',
     marginLeft: 8,
     marginRight: 8,

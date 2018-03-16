@@ -12,7 +12,7 @@ import Intro from '../scenes/introduction'
 import MainScreen from '../scenes'
 import Login from '../scenes/loginRegister'
 import Register from '../scenes/loginRegister/Register'
-import Comment from '../scenes/discuss/Comment'
+import Comments from '../scenes/discuss/Comments'
 import Question from '../scenes/discuss/Question'
 import TestList from '../scenes/test/TestList'
 import MainTest from '../scenes/test/MainTest'
@@ -38,7 +38,7 @@ class AppRoute extends Component{
           <Scene key='Intro' title='Intro' initial  component={Intro}/>
           <Scene key='MainScreen' title='JobSarthi'   component={MainScreen}/>
           <Scene key='Login' component={Login}/>
-          <Scene key='Comment' component={Comment}/>
+          <Scene key='Comments' component={Comments}/>
           <Scene key='Register' component={Register}/>
           <Scene key='Question' component={Question}/>
           <Scene key='SubJobs' component={SubJobs}/>
