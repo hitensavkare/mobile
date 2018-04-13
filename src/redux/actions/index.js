@@ -1,3 +1,4 @@
-import * as AppAction from './AppActions';
-export const ActionCreators=Object.assign({},AppAction,
+import * as jobActions from './jobActions/jobActions'
+export const ActionCreators=Object.assign({},
+  jobActions,
 )

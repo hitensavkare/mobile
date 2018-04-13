@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
   Text,
   View,
-  ScrollView,
-  TouchableOpacity,
   FlatList,
-  Image
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import styles from './MainJobs.styles'
-import {images} from '../../theme'
 import Statusbar from '../../components/Statusbar'
 import HeaderHome from './HeaderHome'
-
+import JobCard from '@components/jobs'
+import {bindActionCreators} from  'redux';
+import styles from './MainJobs.styles'
+import {ActionCreators} from '../../redux/actions';
+import {connect} from 'react-redux';
 //simple data for rendering
 class Home extends Component{
   constructor(props){
@@ -26,109 +23,36 @@ class Home extends Component{
   //  alert(this.props.Text)
   }
   componentDidMount(){
-    this.setState({
-      dataSource: [{
-          id:1
-        },
-        {
-          id:2
-        },
-        {
-          id:3
-        },
-        {
-          id:4
-        },
-        {
-          id:5
-        },
-        {
-          id:6
-        }
-      ]
+    this.props.getAds().then(()=>{
+      this.setState({dataSource:this.props.adsSource})
     })
   }
- _renderCard=(item)=>{
-   return(
-   <TouchableOpacity style={styles.cardView} onPress={()=>{Actions.SubJobs()}}>
-     <View style={{flexDirection:'row'}}>
-       <View style={{flex:3.5}}>
-     <Text style={styles.textHead}>SBI Recruitment 2018 – 8472 Junior Associates, Manager & Multiple Posts</Text>
-   </View>
-     <View style={{flex:0.5,justifyContent:'center'}}>
-       <Image source={images.bookmarmActive} style={{height:40,width:40}}/>
-     </View>
- </View>
-       <View style={[styles.dateContainer,{marginTop:8}]}>
-         <View style={styles.fromDate}>
-           <Text style={styles.subHeadingText}>
-           Apply Mode
-           </Text>
-           <Text style={styles.subText}>
-       Online
-           </Text>
-         </View>
-         <View style={styles.toDate}>
-           <Text style={styles.subHeadingText}>
-           Total Post
-           </Text>
-           <Text style={styles.subText}>
-           8472
-           </Text>
-         </View>
-
-     </View>
-       <View style={styles.impDateContainer}>
-           <Text style={styles.subHeadingText}> Important Dates</Text>
-       <View style={styles.dateContainer}>
-
-         <View style={styles.fromDate}>
-           <Text style={styles.subHeadingText}>
-             From Date
-           </Text>
-           <Text style={styles.subText}>
-         11-jan-2017
-           </Text>
-         </View>
-         <View style={styles.toDate}>
-           <Text style={styles.subHeadingText}>
-           To Date
-           </Text>
-           <Text style={styles.subText}>
-         11-jan-2017
-           </Text>
-         </View>
-       </View>
-     </View>
-     <View style={styles.footerIconView}>
-     <View style={{flexDirection:'row',alignItems:'center'}}>
-       <TouchableOpacity>
-       <Image source={images.likesActive} style={styles.imageIconLike}/>
-       </TouchableOpacity>
-       <Text>Likes</Text>
-       <TouchableOpacity>
-         <Image source={images.linkActive} style={styles.imageIcon}/>
-         </TouchableOpacity>
-     </View>
-     </View>
-   </TouchableOpacity>
- )
-
- }
+  _getId(_id){
+      Actions.SubJobs({id:_id})
+  }
   render(){
-      return(
+    console.log('data Source=',this.state.dataSource)
+    return(
       <View style={styles.container}>
         <Statusbar/>
         <HeaderHome pageName='Jobs' onPress={()=>{Actions.pop()}}/>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={this._renderCard}
-          keyExtractor={(item,index)=>index}
-          initialNumToRender={3}
-        />
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={({item})=>(<JobCard item={item} onPress={()=>this._getId(item._id)}/>)}
+            keyExtractor={(item,index)=>index.toString()}
+            initialNumToRender={3}
+          />
         </View>
     )
   }
 }
 
-export default Home;
+const mapStateToProps=state=>{
+  return{
+    adsSource:state.jobReducer.adsSource,
+  }
+}
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators,dispatch)
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

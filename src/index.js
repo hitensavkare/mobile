@@ -11,19 +11,25 @@ import thunkMiddleware from 'redux-thunk';
 import {connect,Provider} from 'react-redux';
 import {createLogger} from 'redux-logger';
 import AppRoute from './routes';
-import {persistStore,persistReducer} from 'redux-persist';
 import reducer from './redux/reducers'
-
 const loggerMiddleware=createLogger({predicate:(getState,action)=>__DEV__})
-const persistConfig={
-  key:'root',
-  storage:AsyncStorage,
+function configureStore(initialState){
+  const enhancer=compose(
+    applyMiddleware(
+      thunkMiddleware,
+      loggerMiddleware,
+    ),
+  );
+  return createStore(reducer,initialState,enhancer);
 }
+const store=configureStore({});
 
 class  JobSarthi extends Component{
   render(){
     return(
+    <Provider store={store}>
     <AppRoute/>
+  </Provider>
   )
   }
 }

@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux'
-import * as appReducer from './appReducers';
-
-export default combineReducers(Object.assign(
-  appReducer
+import * as jobReducer from './jobReducers/jobreducer'
+export default combineReducers(Object.assign({},
+  jobReducer,
 ))
