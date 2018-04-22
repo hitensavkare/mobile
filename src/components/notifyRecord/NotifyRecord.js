@@ -20,8 +20,8 @@ class NotifyRecord extends Component{
             <Image source={images.iconNotification} style={{height:24,width:24}}/>
           </View>
           <View style={styles.TextColumnContainer}>
-            <Text style={styles.subText}>SPI PO admit Card released.SPI PO admit Card released.SPI PO admit Card released. </Text>
-          <Text style={styles.dateText}>posted on:22/03/2018</Text>
+            <Text style={styles.subText}>{this.props.data.notifyText} </Text>
+          <Text style={styles.dateText}>{this.props.data.notifyDate}</Text>
           </View>
         </View>
     )

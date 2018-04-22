@@ -34,6 +34,7 @@ containerIntro:{
 
 buttonRow:{
   flexDirection: 'row',
+  marginBottom: 16,
 },
 introImageContainer:{
 

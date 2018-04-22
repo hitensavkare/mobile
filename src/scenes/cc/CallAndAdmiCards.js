@@ -1,39 +1,52 @@
 import React, { Component } from 'react';
 import {
   Platform,
-  StyleSheet,
-  Text,
-  View,
-  Image,
   FlatList,
+  View,
+  ActivityIndicator,
 } from 'react-native';
 import styles from '@components/screenStyles/CallAndAdmiCards.styles'
 import {images} from '../../theme'
 //import NotifyRecord from '.../../../components/tupples/NotifyRecord'
 import NotifyRecord from '@components/notifyRecord'
+import Loader from '@components/Loader'
+import {bindActionCreators} from  'redux';
+import {ActionCreators} from '../../redux/actions';
+import {connect} from 'react-redux';
 class CallAndAdmiCards extends Component{
   constructor(props){
     super(props);
     this.state={
-      dataSource:[],
+      dataSource:null,
     }
   }
   componentDidMount(){
-    this.setState({
-      dataSource:[{id:1},{id:2}]
-    })
+      this.props.getNotification().then(()=>{
+        this.setState({dataSource:this.props.notifyData})
+      })
   }
   render(){
     return(
       <View style={styles.container}>
+      {this.state.dataSource===null?
+        <Loader/>:
         <FlatList
             data={this.state.dataSource}
           renderItem={({item})=>(<NotifyRecord data={item}/>)}
-          keyExtractor={(item,index)=>index}
-        />
+          keyExtractor={(item,index)=>index.toString()}
+
+        />}
       </View>
     )
   }
 }
+const mapStateToProps=state=>{
+  return{
+    notifyData:state.notificationReducer.notifyData
+  }
+}
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators,dispatch)
+}
 
-export default CallAndAdmiCards;
+export default connect(mapStateToProps,mapDispatchToProps)(CallAndAdmiCards);

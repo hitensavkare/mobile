@@ -18,11 +18,12 @@ import JobCard from '@components/jobs'
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
+import Loader from '@components/Loader'
 class SubJobs extends Component{
   constructor(props){
     super(props);
     this.state={
-      dataSource:[],
+      dataSource:null,
     }
     //alert(this.props.id)
   }
@@ -35,19 +36,22 @@ class SubJobs extends Component{
     })
   }
   _getId(_id){
-    alert(_id )
+    Actions.SingleJob()
+//    alert(_id )
   }
   render(){
       return(
       <View style={styles.container}>
           <Statusbar />
         <HeaderHome pageName='Sub Jobs' onPress={()=>{Actions.pop()}}/>
+      {this.state.dataSource===null?<Loader/>:
         <FlatList
           data={this.state.dataSource}
           renderItem={({item})=>(<JobCard item={item} onPress={()=>this._getId(item._id)}/>)}
           keyExtractor={(item,index)=>index.toString()}
           initialNumToRender={3}
         />
+}
         </View>
     )
   }

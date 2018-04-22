@@ -19,6 +19,13 @@ export function getSubAds(subResp){
     subResp,
   }
 }
+export function actionGetSingleJob(singleJobResp){
+  return{
+    type:constants.GET_SINGLE_JOB,
+    singleJobResp,
+  }
+}
+
 
 //Get Master Ads
 export function getAds(){
@@ -50,6 +57,24 @@ export function getSubJobs(id){
         }
         else{
         dispatch(getSubAds(resp))
+       // dispatch(registerDone(false))
+        }
+        console.log('--------got the response---------',resp)
+      }).catch((ex) => {
+        console.log('------errror-------',ex);
+        //authFailure(ex,false,false)
+      })
+  }
+}
+export function getSingleJob(id){
+  return (dispatch,getState) => {
+  //  dispatch(startRequest())
+      return Api.post(`/getSingleJobView.php`,id).then(resp => {
+        if(resp.status==='Error'){
+          //dispatch(loginFailed(null,false,resp.message))
+        }
+        else{
+        dispatch(actionGetSingleJob(resp))
        // dispatch(registerDone(false))
         }
         console.log('--------got the response---------',resp)

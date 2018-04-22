@@ -14,15 +14,36 @@ import styles from './SingleJob.styles'
 import {images} from '../../theme'
 import Statusbar from '../../components/Statusbar'
 import HeaderHome from './HeaderHome'
-
+import {bindActionCreators} from  'redux';
+import {ActionCreators} from '../../redux/actions';
+import {connect} from 'react-redux';
+import Loader from '@components/Loader'
 class SingleJob extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      dataSource:null,
+    }
+  }
+  componentDidMount(){
+    this.props.getSingleJob({id:1}).then(()=>{
+      this.setState({
+        dataSource:this.props.singleJobResp
+      })
+    })
+  }
   render(){
+
     return(
-      <View style={styles.container}>
+      this.state.dataSource===null?
+    <Loader/>
+      :  <View style={styles.container}>
         <Statusbar/>
-        <HeaderHome pageName='Lower Division Clerk' onPress={()=>{Actions.pop()}}/>
+        <HeaderHome pageName={this.state.dataSource.postname} onPress={()=>{Actions.pop()}}/>
         <View style={styles.subContainer}>
+          {this.state.dataSource.img===null?
           <Image source={images.profileImage}  style={styles.vacancy_logo}/>
+        :<Image source={{uri:this.state.dataSource.img}}  style={styles.vacancy_logo}/>}
       </View>
       <ScrollView>
       <View style={styles.recordContainer}>
@@ -30,7 +51,7 @@ class SingleJob extends Component{
           Organisation:
         </Text>
         <Text style={styles.textHead2}>
-         Kolkata Municipal Service Commission
+         {this.state.dataSource.org}
         </Text>
       </View>
 
@@ -39,7 +60,7 @@ class SingleJob extends Component{
           Job Location:
         </Text>
         <Text style={styles.textHead2}>
-         Kolkata,India
+        {this.state.dataSource.location}
         </Text>
       </View>
 
@@ -48,7 +69,7 @@ class SingleJob extends Component{
         Qualifications:
         </Text>
         <Text style={styles.textHead2}>
-         Madhyamik Pass or equivalent. and Should have Knowledge in Computer Applications such as MS Office, Internet, etc. Computer typing speed of 30 wpm in English, knowledge of Bengali Computer typing.
+          {this.state.dataSource.qualification}
         </Text>
       </View>
 
@@ -57,7 +78,7 @@ class SingleJob extends Component{
           Age Limit:
         </Text>
         <Text style={styles.textHead2}>
-        18 to 40 yrs.
+          {this.state.dataSource.agelimit}
         </Text>
       </View>
 
@@ -66,7 +87,7 @@ class SingleJob extends Component{
         Application Fee:
         </Text>
         <Text style={styles.textHead2}>
-          Application fee for U.R. & O.B.C. (A & B) candidates is Rs. 150=00 (Rupees One hundred and fifty) plus Processing Charges Rs. 50=00 (Rupees Fifty) plus Rs. 20=00 (Rupees Twenty) towards Bank Charges for Challan deposit. For S.C., S.T. & P.H. candidates only Processing Charges Rs. 50=00 (Rupees Fifty) plus Rs. 20=00 (Rupees Twenty) towards Bank Charges for Challan deposit.
+        {this.state.dataSource.fees}
         </Text>
       </View>
 
@@ -75,7 +96,7 @@ class SingleJob extends Component{
         Selection Procedure:
         </Text>
         <Text style={styles.textHead2}>
-        Selection will be done on the basis of candidates’ performance in the written Test and Personal Interview.
+          {this.state.dataSource.selectionProcess}
         </Text>
       </View>
 
@@ -85,7 +106,7 @@ class SingleJob extends Component{
           Pay Scale:
         </Text>
         <Text style={styles.textHead2}>
-         Rs. 5,400 – Rs. 25,200/- Per Month.
+          {this.state.dataSource.payScale}
         </Text>
       </View>
 
@@ -94,7 +115,7 @@ class SingleJob extends Component{
         Apply Mode:
         </Text>
         <Text style={styles.textHead2}>
-        Online
+          {this.state.dataSource.applyMode}
         </Text>
       </View>
 
@@ -103,7 +124,7 @@ class SingleJob extends Component{
           How to Apply:
         </Text>
         <Text style={styles.textHead2}>
-      Interested and Eligible Candidates may Apply Online though website<Text style={styles.link}  onPress={() => Linking.openURL('http://www.mscwb.org')}> www.mscwb.org</Text> on or before 16.04.2018
+          {this.state.dataSource.howApply}
         </Text>
       </View>
     </ScrollView>
@@ -112,4 +133,15 @@ class SingleJob extends Component{
     )
   }
 }
-export default SingleJob;
+
+
+const mapStateToProps=state=>{
+  return{
+    singleJobResp:state.jobReducer.singleJobResp
+  }
+}
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators,dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SingleJob);

@@ -5,20 +5,20 @@ import {
   FlatList,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import Statusbar from '../../components/Statusbar'
+import Statusbar from '@components/Statusbar'
 import HeaderHome from './HeaderHome'
 import JobCard from '@components/jobs'
 import {bindActionCreators} from  'redux';
 import styles from './MainJobs.styles'
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
-//simple data for rendering
+import Loader from '@components/Loader'
 class Home extends Component{
   constructor(props){
     super(props);
     this.state={
       page:'home',
-      dataSource:[],
+      dataSource:null,
     }
   //  alert(this.props.Text)
   }
@@ -36,12 +36,15 @@ class Home extends Component{
       <View style={styles.container}>
         <Statusbar/>
         <HeaderHome pageName='Jobs' onPress={()=>{Actions.pop()}}/>
+        {this.state.dataSource===null?<Loader/>:
           <FlatList
             data={this.state.dataSource}
             renderItem={({item})=>(<JobCard item={item} onPress={()=>this._getId(item._id)}/>)}
             keyExtractor={(item,index)=>index.toString()}
             initialNumToRender={3}
           />
+        }
+
         </View>
     )
   }

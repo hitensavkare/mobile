@@ -5,6 +5,7 @@ const intialState={
   adsSource:[],
   isLogin:false,
   subResp:[],
+  singleJobResp:null,
 };
 
 export const jobReducer=createReducer(intialState,{
@@ -17,6 +18,12 @@ export const jobReducer=createReducer(intialState,{
    return Object.assign({},state,{
      subResp:action.subResp
    })
+},
+
+[constants.GET_SINGLE_JOB](state,action){
+  return Object.assign({},state,{
+    singleJobResp:action.singleJobResp
+  })
 }
 
 });

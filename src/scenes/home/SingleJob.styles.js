@@ -3,11 +3,13 @@ import {baseStyle as bs,colors,sizes} from '../../theme'
 export default StyleSheet.create({
   container:{
   flex:1,
+  backgroundColor:'white'
 },
 subContainer:{
   marginTop: 8,
 justifyContent: 'center',
 alignItems: 'center',
+
 },
 vacancy_logo:{
 width: '100%',

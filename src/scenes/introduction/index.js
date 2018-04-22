@@ -10,7 +10,7 @@ import PageThree from './PageThree';
 import PageFour from './PageFour';
 import styles from './Intro.styles'
 const {width, height} = Dimensions.get('window');
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 24 : StatusBar.currentHeight;
+import Statusbar from '../../components/Statusbar'
 class Intro extends Component {
 
   constructor(props) {
@@ -78,7 +78,7 @@ _renderButtons(){
   render() {
     return (
       <View style={styles.container}>
-
+        <Statusbar/>
           {this._renderContainer()}
       </View>
     );
