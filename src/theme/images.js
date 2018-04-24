@@ -26,6 +26,7 @@ const images={
     iconClose:require('../assets/images/close.png'),
     iconGallary:require('../assets/images/gallery.png'),
     iconCamera:require('../assets/images/camera.png'),
+    iconPdf:require('../assets/images/pdf.gif'),
 
     iconTestBack:require('../assets/images/arrow-left.gif'),
     iconTestNext:require('../assets/images/arrow-right.gif'),

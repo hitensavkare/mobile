@@ -76,5 +76,12 @@ imageIcon:{
   width: 32,
   marginRight:8,
   marginLeft:8,
+},
+imagePdf:{
+  height:28,
+  width: 28,
+  borderRadius: 28/2,
+  marginRight:8,
+  marginLeft:8,
 }
 });

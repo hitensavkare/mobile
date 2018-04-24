@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_number": "111940073926",
+    "firebase_url": "https://jobsarthi-1521964436692.firebaseio.com",
+    "project_id": "jobsarthi-1521964436692",
+    "storage_bucket": "jobsarthi-1521964436692.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111940073926:android:029bf14327206ae3",
+        "android_client_info": {
+          "package_name": "com.jobsarthi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111940073926-eo8tv8galghggqcvli2qko45lcu8g52q.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "111940073926-u6m0oa3omim1pcud8097pcnicfnmen0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzvSkAa9VUdEzceDfPXUZMG3sK29LJVBI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111940073926-eo8tv8galghggqcvli2qko45lcu8g52q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,12 +8,24 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
-  Image
+  Image,
+  Share
 } from 'react-native';
 import styles from '@scenes/home/MainJobs.styles'
 import {images} from '../../theme'
 
 class JobCard extends Component{
+  _shareData(){
+    Share.share(
+      {
+        title: "New job advertise added",
+        message: 'New job from '+ this.props.item.heading +' is added, for more info download app from '+'www.google.com',
+        url:'www.google.com'
+        // or
+      },
+
+    );
+  }
   render(){
  //const item=this.props.item
   return(
@@ -71,13 +83,22 @@ class JobCard extends Component{
     </View>
     <View style={styles.footerIconView}>
     <View style={{flexDirection:'row',alignItems:'center'}}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>{this._shareData()}}>
       <Image source={images.likesActive} style={styles.imageIconLike}/>
       </TouchableOpacity>
       <Text>Likes</Text>
-      <TouchableOpacity>
+
+
+          {this.props.item.pdf===''?
+          <TouchableOpacity onPress={this.props.gotoUrl}>
         <Image source={images.linkActive} style={styles.imageIcon}/>
+      </TouchableOpacity>
+        :
+          <TouchableOpacity onPress={this.props.getPdf}>
+      <Image source={images.iconPdf} style={styles.imagePdf}/>
+
         </TouchableOpacity>
+      }
     </View>
     </View>
   </TouchableOpacity>

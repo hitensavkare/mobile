@@ -28,10 +28,10 @@ export function actionGetSingleJob(singleJobResp){
 
 
 //Get Master Ads
-export function getAds(){
+export function getAds(category){
   return (dispatch,getState) => {
   //  dispatch(startRequest())
-      return Api.get(`/getMasterJob.php`).then(resp => {
+      return Api.post(`/getMasterJob.php`,category).then(resp => {
         if(resp.status==='Error'){
           //dispatch(loginFailed(null,false,resp.message))
         }

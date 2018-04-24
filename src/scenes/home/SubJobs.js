@@ -44,7 +44,7 @@ class SubJobs extends Component{
       <View style={styles.container}>
           <Statusbar />
         <HeaderHome pageName='Sub Jobs' onPress={()=>{Actions.pop()}}/>
-      {this.state.dataSource===null?<Loader/>:
+        {this.state.dataSource===null?<Loader/>:
         <FlatList
           data={this.state.dataSource}
           renderItem={({item})=>(<JobCard item={item} onPress={()=>this._getId(item._id)}/>)}

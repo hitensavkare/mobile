@@ -19,7 +19,7 @@ class Home extends Component{
     return(
       <View style={styles.container}>
         <ScrollView>
-        <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs()}}>
+        <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'latest'})}}>
           <View style={styles.imageColumnContainer}>
             <Image source={images.introTest} style={{height:40,width:40}}/>
           </View>
