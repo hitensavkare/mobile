@@ -25,66 +25,66 @@ class Home extends Component{
           </View>
           <View style={styles.TextColumnContainer}>
         <Text style={styles.textHeader}>Latest Jobs</Text>
-          <Text style={styles.subText}>Contains questions set.</Text>
+          <Text style={styles.subText}>Contains latest jobs.</Text>
       </View>
     </TouchableOpacity>
-        <View style={styles.rowContainer}>
+        <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'Banking'})}}>
           <View style={styles.imageColumnContainer}>
             <Image source={images.introTest} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
         <Text style={styles.textHeader}>Bank Jobs</Text>
-          <Text style={styles.subText}>Contains questions set.</Text>
+          <Text style={styles.subText}>Contains bank jobs.</Text>
       </View>
-        </View>
-        <View style={styles.rowContainer}>
+    </TouchableOpacity>
+        <TouchableOpacity  style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'Railways'})}}>
           <View style={styles.imageColumnContainer}>
             <Image source={images.introTest} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
         <Text style={styles.textHeader}>Railway Jobs</Text>
-          <Text style={styles.subText}>Contains questions set.</Text>
+          <Text style={styles.subText}>Contains railways jobs.</Text>
       </View>
-        </View>
-        <View style={styles.rowContainer}>
+    </TouchableOpacity>
+        <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'Engineering'})}}>
           <View style={styles.imageColumnContainer}>
             <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>Engineering Jobs</Text>
-          <Text style={styles.subText}>5+ years of previous papers</Text>
+          <Text style={styles.subText}>Contains engineering jobs</Text>
         </View>
-        </View>
+      </TouchableOpacity>
 
-        <View style={styles.rowContainer}>
+        <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'PSU'})}} >
           <View style={styles.imageColumnContainer}>
             <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>PSU Jobs</Text>
-          <Text style={styles.subText}>5+ years of previous papers</Text>
+          <Text style={styles.subText}>Contains PSU jobs</Text>
         </View>
-        </View>
+      </TouchableOpacity>
 
-        <View style={styles.rowContainer}>
+        <TouchableOpacity style={styles.rowContainer}  onPress={()=>{Actions.MainJobs({title:'Civil Services'})}}>
           <View style={styles.imageColumnContainer}>
             <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>Civil Services Jobs</Text>
-          <Text style={styles.subText}>5+ years of previous papers</Text>
+          <Text style={styles.subText}>Contains civil services jobs</Text>
         </View>
-        </View>
+      </TouchableOpacity>
 
-        <View style={styles.rowContainer}>
+        <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'other'})}}>
           <View style={styles.imageColumnContainer}>
             <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>Other Jobs</Text>
-          <Text style={styles.subText}>5+ years of previous papers</Text>
+          <Text style={styles.subText}>Contains other jobs</Text>
         </View>
-        </View>
+      </TouchableOpacity>
       </ScrollView>
       <View style={styles.float}>
         <TouchableOpacity style={styles.floatView} onPress={()=>{this._gotoSearchScreen()}}>

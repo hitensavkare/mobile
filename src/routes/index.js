@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View,Image} from 'react-native';
+import {Text, View,Image,AsyncStorage} from 'react-native';
 import {Scene, Router} from 'react-native-router-flux';
 
 import Home from '../scenes/home'
@@ -16,17 +16,34 @@ import Comments from '../scenes/discuss/Comments'
 import Question from '../scenes/discuss/Question'
 import TestList from '../scenes/test/TestList'
 import MainTest from '../scenes/test/MainTest'
+let val1,val2;
 class AppRoute extends Component{
   constructor(props){
     super(props);
     this.state={
       isLoading:true,
+      isGuestUser:false,
+      isAuthenticateUser:false
     };
   }
   componentWillMount(){
     setTimeout(()=>{
       this.setState({isLoading:false})
     },3000);
+  }
+  componentDidMount(){
+
+    AsyncStorage.getItem('isGuest').then((value)=>{
+      this.setState({isGuest:value})
+
+    })
+
+      AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
+        this.setState({isAuthenticateUser:value})
+      })
+
+      console.log(Boolean(val1),Boolean(val2))
+
   }
 
   _introScreen(){
@@ -36,7 +53,7 @@ class AppRoute extends Component{
      hideTabBar="hideTabBar"
        >
           <Scene key='Intro' title='Intro' initial  component={Intro}/>
-          <Scene key='MainScreen' title='JobSarthi'   component={MainScreen}/>
+          <Scene key='MainScreen' initial={this.state.isGuest ||  this.state.isAuthenticateUser} title='JobSarthi'   component={MainScreen}/>
           <Scene key='Login' component={Login}/>
           <Scene key='Comments' component={Comments}/>
           <Scene key='Register' component={Register}/>
@@ -52,6 +69,7 @@ class AppRoute extends Component{
   }
 
   render(){
+    console.log('our state',this.state.isGuestUser,this.state.isAuthenticateUser)
     if(this.state.isLoading===true){
       return(<Flash/>);
     }

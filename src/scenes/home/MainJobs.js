@@ -10,8 +10,8 @@ import {Actions} from 'react-native-router-flux';
 import Statusbar from '@components/Statusbar'
 import HeaderHome from './HeaderHome'
 import JobCard from '@components/jobs'
-import {bindActionCreators} from  'redux';
 import styles from './MainJobs.styles'
+import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import Loader from '@components/Loader'
