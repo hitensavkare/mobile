@@ -27,9 +27,18 @@ const images={
     iconGallary:require('../assets/images/gallery.png'),
     iconCamera:require('../assets/images/camera.png'),
     iconPdf:require('../assets/images/pdf.gif'),
-
     iconTestBack:require('../assets/images/arrow-left.gif'),
     iconTestNext:require('../assets/images/arrow-right.gif'),
-    iconTime:require('../assets/images/timer.gif')
+    iconTime:require('../assets/images/timer.gif'),
+    iconFeedback:require('../assets/images/feedback.jpg'),
+    iconResultAnalisys:require('../assets/images/result.jpg'),
+    iconContactUs:require('../assets/images/contactUs.jpg'),
+    iconAbout:require('../assets/images/about.jpg'),
+    iconLogout:require('../assets/images/logout.jpg'),
+    iconLogin:require('../assets/images/login.jpg'),
+    iconfeedback:require('../assets/images/feedback.jpg'),
+    iconAbout:require('../assets/images/about.jpg'),
+
+
 };
 export default images;

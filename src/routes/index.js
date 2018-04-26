@@ -16,6 +16,11 @@ import Comments from '../scenes/discuss/Comments'
 import Question from '../scenes/discuss/Question'
 import TestList from '../scenes/test/TestList'
 import MainTest from '../scenes/test/MainTest'
+//Drawer Screen
+import ContactUs from '../scenes/DrawerScreen/ContactUs';
+import AboutUs from '../scenes/DrawerScreen/AboutUs';
+import Feedback from '../scenes/DrawerScreen/Feedback';
+import ResultAnalysis from '../scenes/DrawerScreen/ResultAnalysis';
 let val1,val2;
 class AppRoute extends Component{
   constructor(props){
@@ -64,6 +69,10 @@ class AppRoute extends Component{
           <Scene key='Search' component={Search}/>
           <Scene key='TestList' component={TestList}/>
           <Scene key='MainTest' component={MainTest}/>
+          <Scene key='ContactUs' component={ContactUs}/>
+          <Scene key='AboutUs' component={AboutUs}/>
+          <Scene key='Feedback' component={Feedback}/>
+          <Scene key='ResultAnalysis' component={ResultAnalysis}/>
      </Scene>
    )
   }

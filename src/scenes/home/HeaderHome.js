@@ -17,7 +17,7 @@ class HeaderHome extends Component{
           </Text>
         </View>
 
-          <TouchableOpacity style={styles.rightButtonContainer}>
+          <TouchableOpacity onPress={this.props.searchData} style={styles.rightButtonContainer}>
             <Text style={styles.rightButton}>{this.props.rightButton}</Text>
           </TouchableOpacity>
         </View>

@@ -25,9 +25,17 @@ class Home extends Component{
     }
   }
   componentDidMount(){
+  //  alert(this.props.category)
+    if(this.props.category===undefined){
     this.props.getAds({category:this.props.title}).then(()=>{
       this.setState({dataSource:this.props.adsSource})
     })
+  }
+  else{
+    this.props.getSaerchData({state:this.props.title,category:this.props.category}).then(()=>{
+        this.setState({dataSource:this.props.adsSource})
+    })
+  }
   }
   _getId(_id){
       Actions.SubJobs({id:_id})

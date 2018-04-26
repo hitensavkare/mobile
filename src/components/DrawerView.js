@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import styles from './DrawerView.styles'
 import {images} from '../theme';
+import {Actions} from 'react-native-router-flux';
 class DrawerView extends Component{
   render(){
     return(
@@ -25,36 +25,42 @@ class DrawerView extends Component{
               Bookmarks
             </Text>
           </View>
-          <View style={styles.contentRow}>
-            <Image source={images.icoDiscussActive} style={styles.contentIcon}/>
+          <TouchableOpacity onPress={()=>{Actions.ResultAnalysis()}}  style={styles.contentRow}>
+            <Image source={images.iconResultAnalisys} style={styles.contentIcon}/>
             <Text style={styles.contentText}>
              Result Analysis
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.userSection}>
           <View>
             <Text style={styles.contentHeader}>APPLICATION SECTION</Text>
           </View>
-          <View style={styles.contentRow}>
-            <Image source={images.icoDiscussActive} style={styles.contentIcon}/>
+          <TouchableOpacity onPress={()=>{Actions.ContactUs()}} style={styles.contentRow}>
+            <Image source={images.iconContactUs} style={styles.contentIcon}/>
             <Text style={styles.contentText}>
             Contact Us
             </Text>
-          </View>
-          <View style={styles.contentRow}>
-            <Image source={images.icoDiscussActive} style={styles.contentIcon}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>{Actions.AboutUs()}} style={styles.contentRow}>
+            <Image source={images.iconAbout} style={styles.contentIcon}/>
             <Text style={styles.contentText}>
             About Us
             </Text>
-          </View>
-          <View style={styles.contentRow}>
-            <Image source={images.icoDiscussActive} style={styles.contentIcon}/>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>{Actions.Feedback()}} style={styles.contentRow}>
+            <Image source={images.iconFeedback} style={styles.contentIcon}/>
+            <Text style={styles.contentText}>
+            feedback
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity   style={styles.contentRow}>
+            <Image source={images.iconLogout} style={styles.contentIcon}/>
             <Text style={styles.contentText}>
             Logout
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
 

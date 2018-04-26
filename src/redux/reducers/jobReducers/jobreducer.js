@@ -24,6 +24,11 @@ export const jobReducer=createReducer(intialState,{
   return Object.assign({},state,{
     singleJobResp:action.singleJobResp
   })
-}
+},
+[constants.SEARCH_JOBS](state,action){
+  return Object.assign({},state,{
+    adsSource:action.searchJob
+  })
+},
 
 });
