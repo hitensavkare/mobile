@@ -1,0 +1,2 @@
+export const START_ACTIONS='START_ACTIONS';
+export const GET_FEEDBACK='GET_FEEDBACK';
