@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Header,Icon,Drawer } from 'native-base';
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
-import {colors,appFonts} from '../theme'
+import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native'
+import {colors,appFonts,images} from '../theme'
 import DrawerView from './DrawerView'
 
 class MainHeader extends Component{
@@ -15,9 +15,14 @@ class MainHeader extends Component{
           <TouchableOpacity onPress={this.props.onPress}>
           <Icon name='md-menu' style={styles.mdMenuColor}/>
         </TouchableOpacity>
+        <View style={{flex:2.5,justifyContent:'center'}}>
           <Text style={styles.headerText}>
             JobSarthi
           </Text>
+          </View>
+          <TouchableOpacity style={{flex:0.5,justifyContent:'center',alignItems:'center'}} onPress={this.props.onPress}>
+          <Image source={images.iconSettings} style={styles.settingIcon}/>
+        </TouchableOpacity>
         </View>
       </Header>
 
@@ -47,6 +52,12 @@ const styles=StyleSheet.create({
   mdMenuColor:{
     color:colors.appColor,
     marginRight:16,
+    marginTop: 4,
+  },
+  settingIcon:{
+    height: 30,
+    width: 30,
+    borderRadius: 30/2,
     marginTop: 4,
   }
 

@@ -17,6 +17,7 @@ import {connect} from 'react-redux';
 import DeviceInfo from 'react-native-device-info';
 var PushNotification = require('react-native-push-notification');
 import keys from '../../app/keys'
+import AsyncSetting from '../../app/AsyncSetting'
 let token='';
 class Intro extends Component {
 
@@ -54,9 +55,9 @@ class Intro extends Component {
 
  _setPushDataforGuest(){
    this.props.setGuestUser({push_token:token,identity:'guest',deviceId:DeviceInfo.getUniqueID()}).then(()=>{
-     AsyncStorage.setItem('isGuest', 'true');
-    AsyncStorage.setItem('isAuthenticateUser','false');
-
+     AsyncSetting.setGuestFlag('true');
+  //  AsyncSetting.setAuthenticationUserFlag('false');
+    Actions.MainScreen()
    })
  }
   _renderContainer() {

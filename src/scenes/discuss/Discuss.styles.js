@@ -110,19 +110,11 @@ viewMoretext:{
 },
 
 //style for comment screen
-commentBox:{
-  flexDirection: 'row',
-  borderWidth:1,
-  borderColor:colors.cardBorder,
-  flex:0.5,justifyContent: 'flex-end',
-  alignItems:'center',
-  backgroundColor:'white'
-},
 commentTextInput:{
     ...bs.font.vac_SubcontentFontHeading,
 },
 sendButton:{
-  justifyContent: 'center',alignItems: 'center',flex:1,borderWidth:1,borderRadius:5,height:30,margin:8,
+  justifyContent: 'center',alignItems: 'center',flex:1,borderWidth:1,borderRadius:5,height:30,
   borderColor: colors.appColor
 },
 sendButtonText:{
@@ -173,5 +165,34 @@ headerText:{
 },
 dateText:{
 ...bs.font.vac_SubcontentFontQuickSand,
+},
+commentBox:{
+    flexDirection: 'row',
+    borderWidth:1,
+    borderColor:colors.cardBorder,
+    flex:0.5,justifyContent: 'flex-end',
+    alignItems:'center',
+    backgroundColor:'white',
+    position: 'absolute',
+    bottom: 0,
+    paddingRight: 8,
+},
+commentText:{
+  width:'80%',
+},
+
+float:{
+  position:'absolute',bottom:0,right:0,marginRight:10,
+},
+floatView:{
+  height:70,
+  width: 70,
+  borderRadius:70/2,
+  backgroundColor:colors.appColor,
+  ...bs.align.center,
+},
+subHeadingText:{
+  ...bs.font.vac_SubcontentFontHeading,
+  fontSize: 12,
 },
 });

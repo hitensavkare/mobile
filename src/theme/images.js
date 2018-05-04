@@ -38,7 +38,18 @@ const images={
     iconLogin:require('../assets/images/login.jpg'),
     iconfeedback:require('../assets/images/feedback.jpg'),
     iconAbout:require('../assets/images/about.jpg'),
-
+    iconPSU:require('../assets/images/psujobs.jpg'),
+    iconRail:require('../assets/images/railwayjobs.jpg'),
+    iconotherJobs:require('../assets/images/othersjob.jpg'),
+    iconCivilJobs:require('../assets/images/civiljobs.jpg'),
+    iconSettings:require('../assets/images/settings.jpg'),
+    iconSpam:require('../assets/images/spamalert.jpg'),
+    iconBank:require('../assets/images/bankjob.jpg'),
+    iconBronz:require('../assets/images/bronze.jpg'),
+    iconSilver:require('../assets/images/silver.jpg'),
+    iconGold:require('../assets/images/gold.jpg'),
+    iconDimond:require('../assets/images/dimond.jpg'),
+    iconWelcome:require('../assets/images/drawer.jpg'),
 
 };
 export default images;

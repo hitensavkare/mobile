@@ -30,7 +30,7 @@ class Home extends Component{
     </TouchableOpacity>
         <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'Banking'})}}>
           <View style={styles.imageColumnContainer}>
-            <Image source={images.introTest} style={{height:40,width:40}}/>
+            <Image source={images.iconBank} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
         <Text style={styles.textHeader}>Bank Jobs</Text>
@@ -39,7 +39,7 @@ class Home extends Component{
     </TouchableOpacity>
         <TouchableOpacity  style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'Railways'})}}>
           <View style={styles.imageColumnContainer}>
-            <Image source={images.introTest} style={{height:40,width:40}}/>
+            <Image source={images.iconRail} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
         <Text style={styles.textHeader}>Railway Jobs</Text>
@@ -58,7 +58,7 @@ class Home extends Component{
 
         <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'PSU'})}} >
           <View style={styles.imageColumnContainer}>
-            <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
+            <Image source={images.iconPSU} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>PSU Jobs</Text>
@@ -68,7 +68,7 @@ class Home extends Component{
 
         <TouchableOpacity style={styles.rowContainer}  onPress={()=>{Actions.MainJobs({title:'Civil Services'})}}>
           <View style={styles.imageColumnContainer}>
-            <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
+            <Image source={images.iconCivilJobs} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>Civil Services Jobs</Text>
@@ -78,7 +78,7 @@ class Home extends Component{
 
         <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'other'})}}>
           <View style={styles.imageColumnContainer}>
-            <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
+            <Image source={images.iconotherJobs} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>Other Jobs</Text>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View,Image,AsyncStorage} from 'react-native';
 import {Scene, Router} from 'react-native-router-flux';
+import AsyncSetting from '../app/AsyncSetting'
 
 import Home from '../scenes/home'
 import MainJobs from '../scenes/home/MainJobs'
@@ -16,6 +17,9 @@ import Comments from '../scenes/discuss/Comments'
 import Question from '../scenes/discuss/Question'
 import TestList from '../scenes/test/TestList'
 import MainTest from '../scenes/test/MainTest'
+import PrevQuestionPaper from '../scenes/test/PrevQuestionPaper';
+import Years from '../scenes/test/Years';
+import PdfContainer from '../scenes/test/PdfContainer';
 //Drawer Screen
 import ContactUs from '../scenes/DrawerScreen/ContactUs';
 import AboutUs from '../scenes/DrawerScreen/AboutUs';
@@ -37,19 +41,20 @@ class AppRoute extends Component{
     },3000);
   }
   componentDidMount(){
-
     AsyncStorage.getItem('isGuest').then((value)=>{
-      this.setState({isGuest:value})
+          this.setState({isGuestUser:value})
 
-    })
-
-      AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
+        })
+        AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
         this.setState({isAuthenticateUser:value})
       })
+    //console.log('hello',AsyncSetting.getGuestFlag())
+    //  this.setState({isGuestUser:AsyncSetting.getGuestFlag()})
+    //  isAuthenticateUser:AsyncSetting.getuthenticationUserFlag()})
 
-      console.log(Boolean(val1),Boolean(val2))
-
+      //console.log(Boolean(val1),Boolean(val2))
   }
+
 
   _introScreen(){
     return(
@@ -58,7 +63,7 @@ class AppRoute extends Component{
      hideTabBar="hideTabBar"
        >
           <Scene key='Intro' title='Intro' initial  component={Intro}/>
-          <Scene key='MainScreen' initial={this.state.isGuest ||  this.state.isAuthenticateUser} title='JobSarthi'   component={MainScreen}/>
+          <Scene key='MainScreen' initial={this.state.isGuestUser==='true' ||  this.state.isAuthenticateUser==='true'} title='JobSarthi'   component={MainScreen}/>
           <Scene key='Login' component={Login}/>
           <Scene key='Comments' component={Comments}/>
           <Scene key='Register' component={Register}/>
@@ -73,6 +78,9 @@ class AppRoute extends Component{
           <Scene key='AboutUs' component={AboutUs}/>
           <Scene key='Feedback' component={Feedback}/>
           <Scene key='ResultAnalysis' component={ResultAnalysis}/>
+          <Scene key='PrevQuestionPaper' component={PrevQuestionPaper}/>
+          <Scene key='Years' component={Years}/>
+          <Scene key='PdfContainer' component={PdfContainer}/>
      </Scene>
    )
   }

@@ -3,6 +3,7 @@ import * as constants from '../../actions/authenticationActions/constants'
 
 const intialState={
 error:null,
+userData:null
 };
 
 export const authenticationReducer=createReducer(intialState,{
@@ -17,6 +18,11 @@ export const authenticationReducer=createReducer(intialState,{
 [constants.RESP_ERROR](state,action){
   return Object.assign({},state,{
     error:action.error,
+  })
+},
+[constants.USER_LOGIN](state,action){
+  return Object.assign({},state,{
+    userData:action.userData,
   })
 },
  });

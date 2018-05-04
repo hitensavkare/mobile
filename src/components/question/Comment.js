@@ -29,7 +29,7 @@ class Comments extends Component{
         <View style={styles.commentCard}>
             <View style={styles.commentSection}>
               <View style={styles.commentImgContainer}>
-                <Image source={images.bookmarmActive} style={styles.commentProfileImg}/>
+                <Image source={images.iconWelcome} style={styles.commentProfileImg}/>
               </View>
               <View style={styles.commentText}>
                 <Text style={styles.profileText}>
@@ -40,11 +40,22 @@ class Comments extends Component{
                 </Text>
               </View>
             </View>
+            <View style={{justifyContent:'flex-end',alignItems:'flex-end',marginRight:8}}>
+              <Text style={styles.dateText}>Teached on:22/07/2017</Text>
+            </View>
             <View style={styles.bedgeContainer}>
-              <Text>Gold Bedge</Text>
-              <Text>Silver Bedge</Text>
-              <Text>Bronze Bedge</Text>
-              <Text>Dislike</Text>
+
+              <TouchableOpacity style={styles.rewardTouch}>
+                <Image source={images.iconGold} style={styles.rewardIcon}/>
+                <Text>5</Text>
+            </TouchableOpacity>
+              <TouchableOpacity  style={styles.rewardTouch}><Image source={images.iconSilver} style={styles.rewardIcon}/>
+              <Text>0</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.rewardTouch}><Image source={images.iconBronz} style={styles.rewardIcon}/>
+              <Text>2</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.rewardTouch}><Image source={images.iconSpam} style={styles.rewardIcon}/>
+              <Text>10</Text></TouchableOpacity>
+
             </View>
           </View>
         </View>

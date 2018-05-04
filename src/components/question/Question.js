@@ -36,9 +36,7 @@ constructor(props){
             <Text style={styles.dateText}>Posted on:22/03/2017</Text>
           </View>
           </View>
-          <View style={styles.imageBookmarke}>
-            <Image source={images.bookmarmActive} style={{height:30,width:30}}/>
-          </View>
+          
           </View>
           <View style={styles.commentOptionContainer}>
             <TouchableOpacity style={{marginRight:16}}>
@@ -47,9 +45,7 @@ constructor(props){
             <TouchableOpacity style={{marginRight:16}} onPress={()=>{this._gotoCommentScreen()}}>
               <Image source={images.bookmarmActive} style={{height:30,width:30}}/>
             </TouchableOpacity>
-            <TouchableOpacity style={{marginRight:16}}>
-              <Image source={images.bookmarmActive} style={{height:30,width:30}}/>
-            </TouchableOpacity>
+
           </View>
         </View>
     )

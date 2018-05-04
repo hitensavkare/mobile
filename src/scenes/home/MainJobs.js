@@ -63,7 +63,7 @@ class Home extends Component{
         })
   }
   render(){
-    console.log('data Source=',this.state.dataSource)
+    //console.log('data Source=',this.state.dataSource)
     return(
       <View style={styles.container}>
         <Statusbar/>

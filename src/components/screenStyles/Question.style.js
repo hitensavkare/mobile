@@ -81,9 +81,9 @@ commentSection:{
 
 },
 commentProfileImg:{
-  height: 40,
-  width: 40,
-  borderRadius: 40/2,
+  height: 60,
+  width: 60,
+  borderRadius: 60/2,
 
 },
 commentImgContainer:{
@@ -91,9 +91,9 @@ commentImgContainer:{
   width: 60,
   borderRadius: 60/2,
   borderWidth: 1,
+  borderColor: colors.appColor,
   justifyContent: 'center',
   alignItems: 'center',
-
   margin:8,
 },
 commentText:{
@@ -176,7 +176,6 @@ closeIconContainer:{
 headerTextContainer:{
   flex:3,
   alignItems:'flex-start'
-
 },
 headerText:{
   fontFamily:appFonts.QuicksandBold,
@@ -186,4 +185,19 @@ headerText:{
 dateText:{
 ...bs.font.vac_SubcontentFontQuickSand,
 },
+rewardTouch:{
+  /*height:20,
+  width: 20,
+  borderRadius: 20/2,
+  marginLeft:8,
+  marginRight: 8,*/
+  justifyContent:'center',alignItems:'center'
+},
+rewardIcon:{
+  height:20,
+  width: 20,
+  borderRadius: 20/2,
+  marginLeft:8,
+  marginRight: 8,
+}
 });

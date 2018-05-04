@@ -8,11 +8,12 @@ export default StyleSheet.create({
   subContainer: {
     flex: 1,
     margin: 16,
+    justifyContent: 'center',
 
   },
   QuestionFont:{
-    ...bs.font.vac_SubcontentFontQuickSand,
-
+    width: '100%',
+    ...bs.font.vac_contentFont
   },
   optionContainer:{
     justifyContent: 'flex-start',

@@ -13,7 +13,19 @@ import HeaderLogin from './HeaderLogin'
 import {Actions} from 'react-native-router-flux';
 import {images,colors} from '../../theme'
 import styles from './AppLogin.style'
+import Statusbar from '../../components/Statusbar'
+import {bindActionCreators} from  'redux';
+import {ActionCreators} from '../../redux/actions';
+import {connect} from 'react-redux';
+
 class AppLogin extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      email:null,
+      password:null,
+    }
+  }
   _goToRegister(){
     Actions.Register();
   }
@@ -21,11 +33,12 @@ class AppLogin extends Component{
     alert('clicked forget password')
   }
   _gotoHomeMainWithLoginScreen(){
-    alert('clicked on Login')
+   this.props.authUser({email:this.state.email,password:this.state.password})
   }
   render(){
     return(
       <View  style={styles.container}>
+          <Statusbar/>
         <HeaderLogin onPress={()=>{Actions.pop()}} pageName='Login'/>
         <ScrollView>
            <View style={styles.subContainer}>
@@ -33,8 +46,11 @@ class AppLogin extends Component{
                <Text style={styles.headeFont}>JobSarthi</Text>
              </View>
              <View style={styles.inputView}>
-               <TextInput placeholder="Email" style={styles.textInput}/>
+               <TextInput
+                 onChangeText={(email)=>{this.setState({email})}}
+                 placeholder="Email" style={styles.textInput}/>
               <TextInput placeholder="Password"
+                 onChangeText={(password)=>{this.setState({password})}}
               secureTextEntry={true} />
              </View>
              <View style={styles.loginView}>
@@ -101,5 +117,13 @@ class AppLogin extends Component{
   }
 }
 
+const mapStateToProps=state=>{
+  return{
+    adsSource:state.jobReducer.adsSource,
+  }
+}
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators,dispatch)
+}
 
-export default AppLogin;
+export default connect(mapStateToProps,mapDispatchToProps)(AppLogin);

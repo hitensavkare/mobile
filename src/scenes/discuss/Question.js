@@ -9,41 +9,14 @@ import {
 } from 'react-native';
 import HeaderDiscuss from './HeaderDiscuss'
 import styles from './Question.style'
+import {colors} from '../../theme'
 import Statusbar from '../../components/Statusbar'
 class Question extends Component{
   constructor(props){
     super(props);
     this.state={
       question_category:'',
-      question_type:'Descriptive',
     }
-  }
-  _renderMultipleChoice(){
-    return(
-      <View style={styles.optionContainer}>
-        <TextInput
-          multiline={true}
-          placeholder="Option 1"
-           style={styles.optionText}
-        />
-        <TextInput
-          multiline={true}
-          placeholder="Option 2"
-           style={styles.optionText}
-        />
-        <TextInput
-          multiline={true}
-          placeholder="Option 3"
-           style={styles.optionText}
-        />
-        <TextInput
-          multiline={true}
-          placeholder="Option 4"
-           style={styles.optionText}
-        />
-
-      </View>
-    )
   }
   render(){
   return(
@@ -66,24 +39,16 @@ class Question extends Component{
             <Picker.Item label="Other" value="Other" />
         </Picker>
 
-        <Picker
-          selectedValue={this.state.question_type}
-          onValueChange={(itemValue, itemIndex) => this.setState({question_type: itemValue})}>
-          <Picker.Item label="Choose Question Type" value="NA" />
-          <Picker.Item label="Descriptive" value="Descriptive" />
-          <Picker.Item label="Multiple Choice" value="Multiple Choice" />
-        </Picker>
-
         <View>
           <TextInput
             multiline={true}
             placeholder="Your Question"
+            underlineColorAndroid={colors.appColor}
+            maxLength = {450}
+            multiline = {true}
              style={styles.QuestionFont}
           />
         </View>
-
-          {this.state.question_type==='Descriptive'?null:this._renderMultipleChoice()}
-
       </View>
     </View>
   )

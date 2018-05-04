@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  Text
+  Text,
+  TextInput
 } from 'react-native'
 import {Header} from 'native-base';
 import {images} from '../../theme'
@@ -23,7 +24,16 @@ class Comments extends Component{
   }
   componentDidMount(){
     this.setState({
-      dataSource:[{id:1},{id:2}]
+      dataSource:[{id:1},{id:2},{id:3},{id:4}]
+    })
+  }
+  componentDidUpdate(){
+  }
+  _putComment(){
+    let arrayData=this.state.dataSource;
+    arrayData.push({id:5});
+    this.setState({
+      dataSource:arrayData
     })
   }
   render(){
@@ -40,17 +50,29 @@ class Comments extends Component{
          </View>
          <View style={styles.headerTextContainer}>
            <Text style={styles.headerText}>
-            Questions
+          Comments
            </Text>
          </View>
        </View>
      </Header>
-      <View style={{flex: 3.5}}>
+      <View style={{flex: 3.5,marginBottom:60}}>
         <FlatList
           data={this.state.dataSource}
           renderItem={({item})=>(<Comment data={item}/>)}
           keyExtractor={(item,index)=>index}
         />
+      </View>
+      <View style={styles.commentBox}>
+        <TextInput
+          multiline={true}
+          placeholder='Share Knowledge'
+          style={styles.commentText}
+         />
+         <TouchableOpacity
+           onPress={()=>{this._putComment()}}
+           style={styles.sendButton}>
+           <Text>SHARE</Text>
+         </TouchableOpacity>
       </View>
     </View>
   )

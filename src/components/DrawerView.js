@@ -3,12 +3,42 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import styles from './DrawerView.styles'
 import {images} from '../theme';
 import {Actions} from 'react-native-router-flux';
+import AsyncSetting from '../app/AsyncSetting'
 class DrawerView extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      isAuthUser:false
+    }
+  }
+  componentDidMount(){
+    AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
+    this.setState({isAuthUser:value})
+  })
+
+  AsyncStorage.getItem('id').then((value)=>{
+//alert(value)
+})
+
+  }
+  _logout(){
+    AsyncSetting.setAuthenticationUserFlag('false');
+    AsyncSetting.setGuestFlag('false')
+    Actions.Intro({type:'reset'})
+  //  console.log('hey flag',      AsyncSetting.getuthenticationUserFlag())
+    //  console.log('hey gues inside method',      AsyncSetting.getGuestFlag())*/
+  }
+  componentWillMount(){
+  //  console.log('hey auth suer',      AsyncSetting.getuthenticationUserFlag())
+    //  console.log('hey flag',      AsyncSetting.getGuestFlag())
+
+  }
   render(){
     return(
       <View style={styles.container}>
@@ -37,6 +67,7 @@ class DrawerView extends Component{
           <View>
             <Text style={styles.contentHeader}>APPLICATION SECTION</Text>
           </View>
+
           <TouchableOpacity onPress={()=>{Actions.ContactUs()}} style={styles.contentRow}>
             <Image source={images.iconContactUs} style={styles.contentIcon}/>
             <Text style={styles.contentText}>
@@ -55,12 +86,21 @@ class DrawerView extends Component{
             feedback
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity   style={styles.contentRow}>
+          {this.state.isAuthUser==='false'?
+          <TouchableOpacity  onPress={()=>{Actions.Login()}}  style={styles.contentRow}>
+            <Image source={images.iconLogin} style={styles.contentIcon}/>
+            <Text style={styles.contentText}>
+            Login
+            </Text>
+          </TouchableOpacity>
+          :
+          <TouchableOpacity  onPress={()=>{this._logout()}}  style={styles.contentRow}>
             <Image source={images.iconLogout} style={styles.contentIcon}/>
             <Text style={styles.contentText}>
             Logout
             </Text>
           </TouchableOpacity>
+        }
         </View>
       </View>
 

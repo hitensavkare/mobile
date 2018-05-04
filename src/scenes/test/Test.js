@@ -23,7 +23,7 @@ class Test extends Component{
           <Text style={styles.subText}>Contains questions set.</Text>
       </View>
     </TouchableOpacity>
-        <View style={styles.rowContainer}>
+        <TouchableOpacity onPress={()=>{Actions.PrevQuestionPaper()}} style={styles.rowContainer}>
           <View style={styles.imageColumnContainer}>
             <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
           </View>
@@ -31,7 +31,7 @@ class Test extends Component{
           <Text style={styles.textHeader}>Previous Papers</Text>
           <Text style={styles.subText}>5+ years of previous papers</Text>
         </View>
-        </View>
+      </TouchableOpacity>
       </View>
     )
   }
