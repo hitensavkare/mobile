@@ -25,6 +25,19 @@ export function actionGetPdfs(pdfData){
   }
 }
 
+export function actionGetTestSet(questionSetData){
+  return{
+    type:constants.GET_QUESTION_SET,
+    questionSetData
+  }
+}
+
+export function actionGetPracticeQuestion(practiceQuestion){
+  return{
+    type:constants.GET_PRACTICE_EXAM,
+    practiceQuestion,
+  }
+}
 export function getQuestionPaperSets(data){
   return (dispatch,getState) => {
        dispatch(startRequest())
@@ -66,6 +79,42 @@ export function getPdfs(data){
         }
         else{
         dispatch(actionGetPdfs(resp))
+        }
+      }).catch((ex) => {
+        //authFailure(ex,false,false)
+      })
+  }
+}
+//get Question set
+export function getQuestionTestSet(data){
+  console.log('hey action',data);
+  return (dispatch,getState) => {
+       dispatch(startRequest())
+      return Api.post(`/getQuestionSet.php`,data).then(resp => {
+        if(resp.status==='Error'){
+          //dispatch(loginFailed(null,false,resp.message))
+        }
+        else{
+        dispatch(actionGetTestSet(resp))
+        }
+      }).catch((ex) => {
+        //authFailure(ex,false,false)
+      })
+  }
+}
+
+//getting the practice TestList
+
+export function getPracticeExam(data){
+  console.log('hey action',data);
+  return (dispatch,getState) => {
+       dispatch(startRequest())
+      return Api.post(`/getQuestionData.php`,data).then(resp => {
+        if(resp.status==='Error'){
+          //dispatch(loginFailed(null,false,resp.message))
+        }
+        else{
+        dispatch(actionGetPracticeQuestion(resp))
         }
       }).catch((ex) => {
         //authFailure(ex,false,false)

@@ -36,14 +36,14 @@ constructor(props){
             <Text style={styles.dateText}>Posted on:22/03/2017</Text>
           </View>
           </View>
-          
+
           </View>
           <View style={styles.commentOptionContainer}>
             <TouchableOpacity style={{marginRight:16}}>
-              <Image source={images.likesActive} style={{height:30,width:30}}/>
+              <Image source={images.likesActive} style={{height:25,width:25}}/>
             </TouchableOpacity>
             <TouchableOpacity style={{marginRight:16}} onPress={()=>{this._gotoCommentScreen()}}>
-              <Image source={images.bookmarmActive} style={{height:30,width:30}}/>
+              <Image source={images.iconComment} style={{height:25,width:25}}/>
             </TouchableOpacity>
 
           </View>

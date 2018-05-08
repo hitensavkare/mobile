@@ -4,6 +4,8 @@ const intialState={
   questionSetData:[],
   years:[],
   pdfData:[],
+  testSet:[],
+  practiceQuestion:[],
 };
 
 export const testReducers=createReducer(intialState,{
@@ -24,6 +26,17 @@ export const testReducers=createReducer(intialState,{
 [constants.GET_PDF_DATA](state,action){
   return Object.assign({},state,{
     pdfData:action.pdfData
+  })
+},
+[constants.GET_QUESTION_SET](state,action){
+  return Object.assign({},state,{
+    testSet:action.questionSetData
+  })
+},
+
+[constants.GET_PRACTICE_EXAM](state,action){
+  return Object.assign({},state,{
+    practiceQuestion:action.practiceQuestion
   })
 },
 

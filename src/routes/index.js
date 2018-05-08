@@ -25,6 +25,11 @@ import ContactUs from '../scenes/DrawerScreen/ContactUs';
 import AboutUs from '../scenes/DrawerScreen/AboutUs';
 import Feedback from '../scenes/DrawerScreen/Feedback';
 import ResultAnalysis from '../scenes/DrawerScreen/ResultAnalysis';
+
+//Setting pages
+import Settings from '../scenes/settings';
+import EditProfile from '../scenes/settings/EditProfile';
+import Notifications from '../scenes/settings/Notifications';
 let val1,val2;
 class AppRoute extends Component{
   constructor(props){
@@ -81,6 +86,10 @@ class AppRoute extends Component{
           <Scene key='PrevQuestionPaper' component={PrevQuestionPaper}/>
           <Scene key='Years' component={Years}/>
           <Scene key='PdfContainer' component={PdfContainer}/>
+            <Scene key='Settings' component={Settings}/>
+            <Scene key='EditProfile' component={EditProfile}/>
+            <Scene key='Notifications' component={Notifications}/>
+
      </Scene>
    )
   }

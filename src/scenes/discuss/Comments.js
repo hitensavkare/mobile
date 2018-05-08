@@ -24,7 +24,7 @@ class Comments extends Component{
   }
   componentDidMount(){
     this.setState({
-      dataSource:[{id:1},{id:2},{id:3},{id:4}]
+      dataSource:[{id:1,isAccepted:false},{id:2,isAccepted:true},{id:3,isAccepted:false},{id:4,isAccepted:false}]
     })
   }
   componentDidUpdate(){

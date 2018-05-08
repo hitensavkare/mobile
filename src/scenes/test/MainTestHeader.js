@@ -10,15 +10,15 @@ class MainTestHeader extends Component{
 
       <Header style={styles.header} androidStatusBarColor={colors.appColor}>
         <View style={styles.headerView}>
-          <TouchableOpacity style={styles.backButton} >
-          <Image source={images.iconBack} style={styles.mdMenuColor}/>
-        </TouchableOpacity>
+      { /* <TouchableOpacity style={styles.backButton} >
+        <Image source={images.iconBack} style={styles.mdMenuColor}/>
+      </TouchableOpacity>*/}
           <Text style={styles.headerText}>
-            JobSarthi
+            Examination
           </Text>
-          <TouchableOpacity style={{flex:0.5}} onPress={this.props.onPress}>
+          {/*<TouchableOpacity style={{flex:0.5}} onPress={this.props.onPress}>
           <Icon name='md-menu' style={styles.mdMenuColorView}/>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
         </View>
       </Header>
 

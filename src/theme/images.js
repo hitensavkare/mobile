@@ -50,6 +50,9 @@ const images={
     iconGold:require('../assets/images/gold.jpg'),
     iconDimond:require('../assets/images/dimond.jpg'),
     iconWelcome:require('../assets/images/drawer.jpg'),
-
+    iconEngJob:require('../assets/images/engjob.jpg'),
+    iconTick:require('../assets/images/icons.jpg'),
+    iconEditProfile:require('../assets/images/useredit.jpg'),
+    iconComment:require('../assets/images/comment.jpg'),
 };
 export default images;

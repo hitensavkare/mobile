@@ -15,6 +15,8 @@ import Home from './home'
 import CallAndAdmiCards from './cc'
 import Tabs from 'react-native-tabs'
 import {images} from '../theme';
+import {Actions} from 'react-native-router-flux';
+
 import {MainHeader,DrawerView} from '../components'
 class MainScreen extends Component{
   constructor(props){
@@ -38,8 +40,9 @@ class MainScreen extends Component{
     }
   }
   openDrawer(){
-    this.drawer._root.open()
+  //  this.drawer._root.open()
     //alert('hello')
+    Actions.Settings()
   }
 
   closeDrawer(){

@@ -14,7 +14,7 @@ render(){
   return(
     <View style={styles.searchContainer}>
         <Statusbar/>
-        <HeaderDrawer onPress={()=>{Actions.pop()}} headerTitle="Contact Us"/>
+        <HeaderDrawer onPress={()=>{Actions.pop()}} headerTitle="Result Analysis"/>
     </View>
     )
   }

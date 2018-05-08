@@ -8,8 +8,12 @@ export default StyleSheet.create({
     paddingBottom: 16,
     flex:0.5,
     },
+    container: {
+      backgroundColor:colors.white
+    },
   containerTestSeries:{
     flex: 1,
+    backgroundColor: colors.white
   },
   questionSetContainer:{
     flex:3
@@ -26,7 +30,7 @@ export default StyleSheet.create({
   },
   prevButton:{
     elevation: 0,
-
+    marginTop: 8,
     borderWidth: 1,
     height: 50,
     width: 50,
@@ -53,6 +57,7 @@ export default StyleSheet.create({
   },
   nextButton:{
     elevation: 0,
+    marginTop: 8,
     borderWidth: 1,
     height: 50,
     width: 50,
@@ -73,4 +78,45 @@ export default StyleSheet.create({
   subText:{
   ...bs.font.vac_SubcontentFontHeading,
   },
+  questionContainer:{
+    marginLeft: 8,
+    marginTop: 10,
+    marginRight: 8,
+    padding: 4,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    borderRadius: 8,
+  },
+  radioLabelStyle: {
+    fontSize: 16,
+    color: colors.appColor,
+    ...bs.font.vac_SubcontentFontHeading,
+  },
+  questionText:{
+    ...bs.font.vac_headFont,
+    color: colors.appColor,
+  },
+  radioFormView: {
+    padding: 10,
+    marginLeft: 10,
+    marginTop: 10,
+    flexDirection: 'row'
+  },
+  radioLabelView: {
+    paddingLeft: 25
+  },
+  optionView:{
+    flex:1,
+    backgroundColor: colors.white
+  },
+  optionViewButton:{
+    marginLeft: 8,
+    flex:1,
+    marginTop: 10,
+    marginRight: 8,
+    padding: 4,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    borderRadius: 8,
+  }
 })

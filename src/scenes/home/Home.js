@@ -11,6 +11,7 @@ import {
 import {Actions} from 'react-native-router-flux';
 import styles from './Home.styles'
 import {images} from '../../theme'
+
 class Home extends Component{
   _gotoSearchScreen(){
     Actions.Search()
@@ -48,7 +49,7 @@ class Home extends Component{
     </TouchableOpacity>
         <TouchableOpacity style={styles.rowContainer} onPress={()=>{Actions.MainJobs({title:'Engineering'})}}>
           <View style={styles.imageColumnContainer}>
-            <Image source={images.iconPreviosePaper} style={{height:40,width:40}}/>
+            <Image source={images.iconEngJob} style={{height:40,width:40}}/>
           </View>
           <View style={styles.TextColumnContainer}>
           <Text style={styles.textHeader}>Engineering Jobs</Text>

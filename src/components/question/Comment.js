@@ -11,10 +11,8 @@ import {
 } from 'react-native'
 import {Header} from 'native-base';
 import {images} from '../../theme'
-import Statusbar from '../../components/Statusbar'
 import styles from '../screenStyles/Question.style'
 import {Actions} from 'react-native-router-flux';
-import {CardItem} from 'native-base';
 class Comments extends Component{
   constructor(props){
     super(props);
@@ -44,18 +42,29 @@ class Comments extends Component{
               <Text style={styles.dateText}>Teached on:22/07/2017</Text>
             </View>
             <View style={styles.bedgeContainer}>
+              <View style={{flex:1,justifyContent:'flex-start',alignItems:'center'}}>
+                {this.props.data.isAccepted===true?
+                  <TouchableOpacity style={styles.rewardTouch}>
+                    <Image source={images.iconTick} style={styles.rewardIcon}/>
+                    <Text>Accepted</Text>
+                </TouchableOpacity>
+                :null
+                }
 
+              </View>
+              <View style={{flexDirection:'row'}}>
               <TouchableOpacity style={styles.rewardTouch}>
                 <Image source={images.iconGold} style={styles.rewardIcon}/>
                 <Text>5</Text>
             </TouchableOpacity>
               <TouchableOpacity  style={styles.rewardTouch}><Image source={images.iconSilver} style={styles.rewardIcon}/>
-              <Text>0</Text></TouchableOpacity>
+                <Text>2</Text>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.rewardTouch}><Image source={images.iconBronz} style={styles.rewardIcon}/>
               <Text>2</Text></TouchableOpacity>
               <TouchableOpacity style={styles.rewardTouch}><Image source={images.iconSpam} style={styles.rewardIcon}/>
               <Text>10</Text></TouchableOpacity>
-
+              </View>
             </View>
           </View>
         </View>
