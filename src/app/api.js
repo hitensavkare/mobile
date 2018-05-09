@@ -29,7 +29,7 @@ class Api {
 
   static mindCentralExplorer(route, params,verb,) {
 //    const host = 'http://192.168.43.109:91/JobSarthi/Backend/api'
-const host = 'http://192.168.1.103:91/JobSarthi/Backend/api'
+const host = 'http://192.168.1.102:91/JobSarthi/Backend/api'
     //const host = 'http://webapi.mindcentral.info'
     const url = `${host}${route}`
     console.log(url)

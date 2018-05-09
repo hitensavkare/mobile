@@ -21,14 +21,18 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from '../../
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
-
+let scoreCalculate=[];
 class MainTest extends Component{
   constructor(props){
     super(props)
   this.state={
     index:0,
     dataSource:[],
-    singleData:null
+    singleData:null,
+    opt1:null,
+    opt2:null,
+    opt3:null,
+    opt4:null,
     }
   }
   openDrawer(){
@@ -49,9 +53,21 @@ class MainTest extends Component{
   }
 
   _incrementIndex(){
+
+    this.setState({
+      opt1:false,
+      opt2:false,
+      opt3:false,
+      opt4:false
+    })
     let newIndex=1;
     if(this.state.index+1>=this.state.dataSource.length){
-      alert('done')
+      let result=0
+      for(let i=0;i<scoreCalculate.length;i++){
+        result=result+scoreCalculate[i];
+      }
+      //alert(result)
+      Actions.Result({result:result})
     }
     else{
       newIndex=this.state.index+1;
@@ -63,7 +79,13 @@ class MainTest extends Component{
     }
   }
   _decrementIndex(){
-    let newIndex=1;
+    this.setState({
+      opt1:false,
+      opt2:false,
+      opt3:false,
+      opt4:false
+    })
+      let newIndex=1;
     if(this.state.index<=0){
       alert('last Question')
     }
@@ -76,7 +98,51 @@ class MainTest extends Component{
       })
     }
   }
+checkAns(data,flag){
+//  alert(flag)
+console.log(data,this.state.singleData.ans);
+  if(data===this.state.singleData.ans){
+    scoreCalculate[this.state.index]=1
+  }
+  else {
+    scoreCalculate[this.state.index]=-0.25
+  }
+if( flag==='opt1'){
+  this.setState({
+    opt1:true,
+    opt2:false,
+    opt3:false,
+    opt4:false
+  })
+}
+ else if(flag==='opt2'){
+  this.setState({
+    opt1:false,
+    opt2:true,
+    opt3:false,
+    opt4:false
+  })
+}
 
+else if(flag==='opt3'){
+  this.setState({
+    opt1:false,
+    opt2:false,
+    opt3:true,
+    opt4:false
+  })
+}
+else if(flag==='opt4'){
+  this.setState({
+    opt1:false,
+    opt2:false,
+    opt3:false,
+    opt4:true
+  })
+}
+
+console.log('hey your score is=',scoreCalculate)
+}
   render(){
     return(
     /*  <Drawer
@@ -90,7 +156,7 @@ class MainTest extends Component{
         >*/
       <View style={styles.containerTestSeries}>
         <Statusbar/>
-      <MainTestHeader/>
+      <MainTestHeader title="Examination"/>
 
       <View style={styles.timeContainer}>
           <Image source={images.iconTime} style={{height: 60,width: 60}}/>
@@ -110,26 +176,60 @@ class MainTest extends Component{
             </Text>
           </View>
           <View style={styles.optionView}>
-            <TouchableOpacity  style={styles.optionViewButton}>
+          {this.state.opt1===true?
+            <TouchableOpacity  style={styles.optionViewSelectedButton} onPress={()=>{this.checkAns(this.state.singleData.opt1,'opt1')}}>
               <Text style={styles.radioLabelStyle}>
               {this.state.singleData.opt1}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionViewButton}>
+            :
+            <TouchableOpacity  style={styles.optionViewButton} onPress={()=>{this.checkAns(this.state.singleData.opt1,'opt1')}}>
+              <Text style={styles.selectedText}>
+              {this.state.singleData.opt1}
+              </Text>
+            </TouchableOpacity>
+          }
+          {this.state.opt2===true?
+            <TouchableOpacity  style={styles.optionViewSelectedButton} onPress={()=>{this.checkAns(this.state.singleData.opt2,'opt2')}}>
               <Text style={styles.radioLabelStyle}>
               {this.state.singleData.opt2}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionViewButton}>
+            :
+            <TouchableOpacity  style={styles.optionViewButton} onPress={()=>{this.checkAns(this.state.singleData.opt2,'opt2')}}>
+              <Text style={styles.selectedText}>
+              {this.state.singleData.opt2}
+              </Text>
+            </TouchableOpacity>
+          }
+
+          {this.state.opt3===true?
+            <TouchableOpacity  style={styles.optionViewSelectedButton} onPress={()=>{this.checkAns(this.state.singleData.opt3,'opt3')}}>
               <Text style={styles.radioLabelStyle}>
               {this.state.singleData.opt3}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionViewButton}>
+            :
+            <TouchableOpacity  style={styles.optionViewButton} onPress={()=>{this.checkAns(this.state.singleData.opt3,'opt3')}}>
+              <Text style={styles.selectedText}>
+              {this.state.singleData.opt3}
+              </Text>
+            </TouchableOpacity>
+          }
+
+          {this.state.opt4===true?
+            <TouchableOpacity  style={styles.optionViewSelectedButton} onPress={()=>{this.checkAns(this.state.singleData.opt4,'opt4')}}>
               <Text style={styles.radioLabelStyle}>
               {this.state.singleData.opt4}
               </Text>
             </TouchableOpacity>
+            :
+            <TouchableOpacity  style={styles.optionViewButton} onPress={()=>{this.checkAns(this.state.singleData.opt4,'opt4')}}>
+              <Text style={styles.selectedText}>
+              {this.state.singleData.opt4}
+              </Text>
+            </TouchableOpacity>
+          }
           </View>
         </View>
       </View>

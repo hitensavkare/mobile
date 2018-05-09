@@ -20,7 +20,7 @@ class MainHeader extends Component{
             JobSarthi
           </Text>
           </View>
-          <TouchableOpacity style={{flex:0.5,justifyContent:'center',alignItems:'center'}} onPress={this.props.onPress}>
+          <TouchableOpacity style={{flex:0.5,justifyContent:'center',alignItems:'center'}} onPress={this.props.settings}>
           <Image source={images.iconSettings} style={styles.settingIcon}/>
         </TouchableOpacity>
         </View>

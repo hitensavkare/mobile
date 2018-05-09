@@ -16,6 +16,7 @@ import Register from '../scenes/loginRegister/Register'
 import Comments from '../scenes/discuss/Comments'
 import Question from '../scenes/discuss/Question'
 import TestList from '../scenes/test/TestList'
+import Result from '../scenes/test/Result'
 import MainTest from '../scenes/test/MainTest'
 import PrevQuestionPaper from '../scenes/test/PrevQuestionPaper';
 import Years from '../scenes/test/Years';
@@ -89,6 +90,7 @@ class AppRoute extends Component{
             <Scene key='Settings' component={Settings}/>
             <Scene key='EditProfile' component={EditProfile}/>
             <Scene key='Notifications' component={Notifications}/>
+              <Scene key='Result' component={Result}/>
 
      </Scene>
    )

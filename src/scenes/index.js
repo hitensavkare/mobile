@@ -40,9 +40,12 @@ class MainScreen extends Component{
     }
   }
   openDrawer(){
-  //  this.drawer._root.open()
+   this.drawer._root.open()
     //alert('hello')
-    Actions.Settings()
+
+  }
+  _gotoSetting(){
+      Actions.Settings()
   }
 
   closeDrawer(){
@@ -61,6 +64,7 @@ class MainScreen extends Component{
           <View style={styles.container}>
             <MainHeader
               onPress={()=>{this.openDrawer()}}
+              settings={()=>this._gotoSetting()}
             />
             <View style={{flex:1,justifyContent:'center',alignItems: 'center'}}>
 

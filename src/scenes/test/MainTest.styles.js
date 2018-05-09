@@ -92,6 +92,11 @@ export default StyleSheet.create({
     color: colors.appColor,
     ...bs.font.vac_SubcontentFontHeading,
   },
+  selectedText: {
+    fontSize: 16,
+    color: colors.appColor,
+    ...bs.font.vac_SubcontentFontHeading,
+  },
   questionText:{
     ...bs.font.vac_headFont,
     color: colors.appColor,
@@ -118,5 +123,16 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.cardBorder,
     borderRadius: 8,
+  },
+  optionViewSelectedButton:{
+    marginLeft: 8,
+    flex:1,
+    marginTop: 10,
+    marginRight: 8,
+    padding: 4,
+    borderWidth: 1,
+    backgroundColor: colors.cardBorder,
+    borderRadius: 8,
+    borderColor: colors.appColor
   }
 })

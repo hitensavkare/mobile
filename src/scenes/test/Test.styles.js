@@ -39,4 +39,31 @@ export default StyleSheet.create({
   subText:{
   ...bs.font.vac_SubcontentFontHeading,
   },
+  marksText:{
+    ...bs.font.vac_headFont,
+      color: colors.appColor,
+  },
+  marksContainer:{
+    ...bs.align.center
+  },
+  queNoContainer:{
+    flex:0.5,
+      ...bs.align.center,
+        borderWidth: 1,
+        borderColor: colors.cardBorder
+  },
+  ansContainer:{
+    flex:3,
+      ...bs.align.center,
+      borderWidth: 1,
+        borderColor: colors.cardBorder
+  },
+  ansText:{
+    ...bs.font.vac_headFont,
+      color: colors.appColor
+  },
+  ansKeyContainer:{
+    flexDirection:'row',justifyContent:'center',alignItems:'center'
+  }
+
 })

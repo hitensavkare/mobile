@@ -14,7 +14,7 @@ class MainTestHeader extends Component{
         <Image source={images.iconBack} style={styles.mdMenuColor}/>
       </TouchableOpacity>*/}
           <Text style={styles.headerText}>
-            Examination
+            {this.props.title}
           </Text>
           {/*<TouchableOpacity style={{flex:0.5}} onPress={this.props.onPress}>
           <Icon name='md-menu' style={styles.mdMenuColorView}/>
