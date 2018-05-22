@@ -26,6 +26,7 @@ class CallAndAdmiCards extends Component{
       })
   }
   render(){
+    console.log('hello data',this.state.dataSource);
     return(
       <View style={styles.container}>
       {this.state.dataSource===null?
@@ -42,7 +43,7 @@ class CallAndAdmiCards extends Component{
 }
 const mapStateToProps=state=>{
   return{
-    notifyData:state.notificationReducer.notifyData
+    notifyData:state.notificationReducer.notificationData
   }
 }
 function mapDispatchToProps(dispatch){

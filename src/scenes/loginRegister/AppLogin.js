@@ -17,7 +17,9 @@ import Statusbar from '../../components/Statusbar'
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
-
+let  token=null;
+import keys from '../../app/keys'
+var PushNotification = require('react-native-push-notification');
 class AppLogin extends Component{
   constructor(props){
     super(props)
@@ -25,6 +27,17 @@ class AppLogin extends Component{
       email:null,
       password:null,
     }
+    PushNotification.configure({
+      senderID:keys.push_notification_sender_id,
+    // (optional) Called when Token is generated (iOS and Android)
+      onRegister: function(push_token) {
+      token=push_token.token
+      console.log('notification token',push_token)
+      },
+      onNotification: function(notification) {
+      //console.log( 'NOTIFICATION Received:', notification );
+    },
+  })
   }
   _goToRegister(){
     Actions.Register();
@@ -66,7 +79,7 @@ class AppLogin extends Component{
 
              <View style={styles.buttonMainView}>
                <View style={styles.buttonView}>
-                 <Button light style={styles.socialButtons}>
+                 <Button onPress={()=>{this.props.fbAuth(token)}} light style={styles.socialButtons}>
                    <View style={{flex:0.4,justifyContent:'center',alignItems:'center'}}>
                      <Image source={images.iconFacebook} style={styles.fbIcon}/>
                    </View>
@@ -76,7 +89,7 @@ class AppLogin extends Component{
                      </Text>
                    </View>
                  </Button>
-                 <Button light style={styles.socialButtons2}>
+                 <Button onPress={()=>{this.props.googleAuth(token)}} light style={styles.socialButtons2}>
                    <View style={{flex:0.4,justifyContent:'center',alignItems:'center'}}>
                      <Image source={images.iconGoogle} style={styles.googleIcon}/>
                    </View>

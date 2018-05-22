@@ -7,12 +7,14 @@ export default StyleSheet.create({
 },
 profileContainer:{
   height:(sizes.height)/3,
-  backgroundColor:'blue',
+  //backgroundColor:'blue',
   justifyContent: 'center',
-  alignItems:'center'
+  alignItems:'center',
+  marginTop: 16,
 },
 profileImage:{
   height:(sizes.height)/3,
+  width: '100%',
   resizeMode: 'stretch'
 },
 userSection:{

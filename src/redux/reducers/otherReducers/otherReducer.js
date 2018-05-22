@@ -3,7 +3,7 @@ import * as constants from '../../actions/otherActions/constants'
 const intialState={
 };
 
-export const notificationReducer=createReducer(intialState,{
+export const otherReducer=createReducer(intialState,{
   [constants.START_ACTIONS](state,action){
     return Object.assign({},state,{
 

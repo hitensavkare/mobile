@@ -10,17 +10,22 @@ export default StyleSheet.create({
   containerTestSeries:{
     flex: 1,
   },
+  subContainer:{
+    backgroundColor: colors.white,
+    flex:1
+  },
   rowContainer:{
     flexDirection: 'row',
     marginLeft: 8,
     marginRight: 8,
     marginTop: 8,
-    height: 58,
+
     borderWidth: 1,
     borderColor: colors.cardBorder,
     borderRadius: 8,
     backgroundColor: 'white'
   },
+
   imageColumnContainer:{
     flex:1,
     justifyContent: 'center',
@@ -64,6 +69,26 @@ export default StyleSheet.create({
   },
   ansKeyContainer:{
     flexDirection:'row',justifyContent:'center',alignItems:'center'
-  }
+  },
+  InstructionText:{
+    color: colors.appColor,
+    ...bs.font.vac_headFont,
+    margin: 8,
+  },
+  submitContainer:{
+    height: 48,
+    borderWidth: 1,
+    marginLeft: 32,
+    marginRight: 32,
+    borderRadius: 8,
+    borderColor:colors.appColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  submitText:{
+    ...bs.font.vac_SubcontentFontHeading,
+    fontSize: 16,
+    color:colors.appColor,
+  },
 
 })

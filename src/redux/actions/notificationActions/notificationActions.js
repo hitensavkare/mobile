@@ -2,15 +2,14 @@ import * as constants from './constants'
 import Api from '../../../app/api'
 export function startRequest(){
   return{
-    type: constants.START_REQUEST
+    type:constants.START_REQUEST
   };
 }
-export function actionNotification(notifyData){
+export function actionNotification(notifyDataa){
   return{
     type:constants.GET_NOTIFICATION,
-    notifyData,
-
-  }
+    notifyDataa,
+  };
 }
 
 //Get Data of Notifications
@@ -24,8 +23,9 @@ export function getNotification(){
         }
         else{
         dispatch(actionNotification(resp))
+          console.log('--------got the response---------',resp)
         }
-        console.log('--------got the response---------',resp)
+
       }).catch((ex) => {
         console.log('------errror-------',ex);
         //authFailure(ex,false,false)

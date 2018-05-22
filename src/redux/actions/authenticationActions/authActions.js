@@ -2,6 +2,10 @@ import * as constants from './constants'
 import Api from '../../../app/api'
 import AsyncSetting from '../../../app/AsyncSetting'
 import {Actions} from 'react-native-router-flux';
+import DeviceInfo from 'react-native-device-info';
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+import FBSDK,{LoginManager,AccessToken} from 'react-native-fbsdk'
+var PushNotification = require('react-native-push-notification');
 export function startRequest(){
   return{
     type: constants.START_AUTH
@@ -46,6 +50,37 @@ export function setGuestUser(data){
   }
 }
 
+export function registerUser(data){
+  console.log(data);
+  return (dispatch,getState) => {
+      dispatch(startRequest())
+      return Api.post(`/register.php`,data).then(resp => {
+        if(resp.status==='err'){
+          alert(resp.message)
+        }
+        else{
+          PushNotification.localNotification({
+            ticker: "My Notification Ticker",
+            autoCancel: true, // (optional) default: true
+            largeIcon: "ic_launcher", // (optional) default: "ic_launcher"
+            smallIcon: "ic_notification", // (optional) default: "ic_notification" with fallback for "ic_launcher"
+            title: "Verify Email", // (optional)
+            message: "Login credentials sent on your email id, please check it.", // (required)
+            soundName: 'default',
+          })
+          AsyncSetting.setAuthenticationUserFlag('true')
+          AsyncSetting.setId(resp._id)
+          AsyncSetting.setUrl(resp.url)
+            Actions.Login();
+        }
+      }).catch((ex) => {
+        console.log('------errror-------',ex);
+
+        actionSetError(ex)
+      })
+  }
+}
+
 export function authUser(data){
   console.log('hey data',data);
   return (dispatch,getState) => {
@@ -53,11 +88,13 @@ export function authUser(data){
       return Api.post(`/authUser.php`,data).then(resp => {
         if(resp.status==='err'){
           //dispatch(actionSetError())
-          alert("Something went wrong,please try again")
+          alert(resp.message)
         }
         else{
           AsyncSetting.setAuthenticationUserFlag('true')
           AsyncSetting.setId(resp._id)
+            AsyncSetting.setUrl(resp.url)
+          //  alert(resp.url)
           dispatch(actionUserLogin(resp))
           Actions.MainScreen();
             console.log('--------got the response---------',resp)
@@ -67,5 +104,66 @@ export function authUser(data){
         //console.log('------errror-------',ex);
         actionSetError(ex)
       })
+  }
+}
+
+//Facebook authentication
+export function fbAuth(token){
+  return (dispatch) => {
+    //  dispatch(authStarted(false,true));
+    LoginManager.logInWithReadPermissions(['email','user_birthday'])
+    .then(function(result){
+      if(result.isCancelled){
+      //    dispatch(authFailureRemove());
+      }
+      else{
+        AccessToken.getCurrentAccessToken().then((data) => {
+         const { accessToken } = data
+         console.log('--------token obtain------',accessToken);
+         fetch('https://graph.facebook.com/v2.5/me?fields=picture.height(2048),birthday,name,email,gender&access_token=' + accessToken)
+         .then((response) => response.json())
+         .then((json) => {
+            console.log("get the fb data",json);
+           const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:json.name,mail:json.email,profilepic:json.picture.data.url,gender:json.gender,birthDay:json.birthday,provider:'Facebook'}
+
+           return Api.post(`/register.php`,dataT).then(respData => {
+              Actions.MainScreen();
+           })
+
+         })
+       })
+      }
+    }).catch((ex) => {
+      console.log('------errror-------',ex);
+      authFailure(ex,false,false)
+    });
+
+  }
+
+}
+
+//Google authentication
+export function googleAuth(token){
+  return (dispatch) => {
+//dispatch(authStarted(false,true));
+GoogleSignin.configure({
+      //iosClientId:'279628207670-7782ko2r54602h3lajalu7t18hoq6q4o.apps.googleusercontent.com',
+      webClientId:'111940073926-eo8tv8galghggqcvli2qko45lcu8g52q.apps.googleusercontent.com'
+    }).then(()=>{
+
+       GoogleSignin.signIn()
+            .then((user) => {
+              console.log('----google response-------------',user);
+              //dispatch(authSuccess(true,user.name,user.photo,true));
+              const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:user.name,mail:user.email,profilepic:user.photo,gender:null,birthDay:null,provider:'Google'}
+              /*return Api.post(`/mobileSocialLogin`,dataT).then(respData => {
+                dispatch(authSuccess(true,user.name,user.photo,null,null,'google','therapist',respData.authToken,user.email,null));
+                Actions.Home({ type:'reset',isUnsheduleVisible:false,selectedPage:'First', flag:'month'})
+              })*/
+            })
+            .catch((err) => {
+            dispatch(authFailure(err,false,false));
+            }).done();
+    })
   }
 }

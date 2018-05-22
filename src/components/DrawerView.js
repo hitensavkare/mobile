@@ -14,22 +14,27 @@ class DrawerView extends Component{
   constructor(props){
     super(props)
     this.state={
-      isAuthUser:false
+      isAuthUser:false,
+      imgUrl:null,
     }
   }
   componentDidMount(){
+
+    AsyncStorage.getItem('imgUrl').then((value)=>{
+  this.setState({imgUrl:value})
+  })
+
     AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
     this.setState({isAuthUser:value})
   })
 
-  AsyncStorage.getItem('id').then((value)=>{
-//alert(value)
-})
+
 
   }
   _logout(){
     AsyncSetting.setAuthenticationUserFlag('false');
     AsyncSetting.setGuestFlag('false')
+      AsyncSetting.setUrl(null)
     Actions.Intro({type:'reset'})
   //  console.log('hey flag',      AsyncSetting.getuthenticationUserFlag())
     //  console.log('hey gues inside method',      AsyncSetting.getGuestFlag())*/
@@ -40,10 +45,16 @@ class DrawerView extends Component{
 
   }
   render(){
+console.log('hello image',this.state.imgUrl)
     return(
       <View style={styles.container}>
         <View style={styles.profileContainer}>
-          <Image source={images.profileImage} style={styles.profileImage}/>
+          {this.state.imgUrl==='null'?
+            <Image source={images.guestImg} style={styles.profileImage}/>
+            :
+            <Image source={{uri:this.state.imgUrl}} style={styles.profileImage}/>
+          }
+
         </View>
         <View style={styles.userSection}>
           <View>

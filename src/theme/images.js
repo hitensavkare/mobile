@@ -54,5 +54,6 @@ const images={
     iconTick:require('../assets/images/icons.jpg'),
     iconEditProfile:require('../assets/images/useredit.jpg'),
     iconComment:require('../assets/images/comment.jpg'),
+    guestImg:require('../assets/images/drawer.jpg'),
 };
 export default images;

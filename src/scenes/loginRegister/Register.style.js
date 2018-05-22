@@ -160,8 +160,10 @@ export default StyleSheet.create({
      marginLeft:18 ,
    color: '#8897ad',
    ...bs.font.vac_SubcontentFontQuickSand,
-
    marginBottom:20
-
  },
+ errorMessage:{
+   color: 'red',
+     ...bs.font.vac_SubcontentFontQuickSand,
+ }
 });

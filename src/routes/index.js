@@ -18,6 +18,7 @@ import Question from '../scenes/discuss/Question'
 import TestList from '../scenes/test/TestList'
 import Result from '../scenes/test/Result'
 import MainTest from '../scenes/test/MainTest'
+import Instruction from '../scenes/test/Instruction'
 import PrevQuestionPaper from '../scenes/test/PrevQuestionPaper';
 import Years from '../scenes/test/Years';
 import PdfContainer from '../scenes/test/PdfContainer';
@@ -87,10 +88,11 @@ class AppRoute extends Component{
           <Scene key='PrevQuestionPaper' component={PrevQuestionPaper}/>
           <Scene key='Years' component={Years}/>
           <Scene key='PdfContainer' component={PdfContainer}/>
-            <Scene key='Settings' component={Settings}/>
-            <Scene key='EditProfile' component={EditProfile}/>
-            <Scene key='Notifications' component={Notifications}/>
-              <Scene key='Result' component={Result}/>
+          <Scene key='Settings' component={Settings}/>
+          <Scene key='EditProfile' component={EditProfile}/>
+          <Scene key='Notifications' component={Notifications}/>
+          <Scene key='Result' component={Result}/>
+          <Scene key='Instruction' component={Instruction}/>
 
      </Scene>
    )

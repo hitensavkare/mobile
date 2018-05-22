@@ -54,7 +54,7 @@ class Intro extends Component {
   }
 
  _setPushDataforGuest(){
-   this.props.setGuestUser({push_token:token,identity:'guest',deviceId:DeviceInfo.getUniqueID()}).then(()=>{
+   this.props.setGuestUser({pushToken:token,provider:'guest',deviceId:DeviceInfo.getUniqueID()}).then(()=>{
      AsyncSetting.setGuestFlag('true');
   //  AsyncSetting.setAuthenticationUserFlag('false');
     Actions.MainScreen()

@@ -44,7 +44,7 @@ class Feedback extends Component{
         <HeaderDrawer onPress={()=>{Actions.pop()}} headerTitle="Feedback"/>
         <View style={styles.subContainer}>
           <Text style={styles.fontHeading}>
-            Your feedback is valueable from us,please write us here
+            Your feedback is valueable for us,please write us here
           </Text>
           <TextInput
             onChangeText={(value)=>{this.setState({feedback:value})}}

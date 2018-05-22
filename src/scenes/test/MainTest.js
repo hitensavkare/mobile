@@ -21,7 +21,9 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from '../../
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
+import Loader from '@components/Loader'
 let scoreCalculate=[];
+let result=0
 class MainTest extends Component{
   constructor(props){
     super(props)
@@ -62,12 +64,12 @@ class MainTest extends Component{
     })
     let newIndex=1;
     if(this.state.index+1>=this.state.dataSource.length){
-      let result=0
+       result=0
       for(let i=0;i<scoreCalculate.length;i++){
         result=result+scoreCalculate[i];
       }
       //alert(result)
-      Actions.Result({result:result})
+      Actions.Result({type:'reset', result:result})
     }
     else{
       newIndex=this.state.index+1;
@@ -143,7 +145,15 @@ else if(flag==='opt4'){
 
 console.log('hey your score is=',scoreCalculate)
 }
+submitTest(){
+  result=0;
+  for(let i=0;i<scoreCalculate.length;i++){
+    result=result+scoreCalculate[i];
+  }
+  Actions.Result({type:'reset',result:result})
+}
   render(){
+console.log('hello',this.state.dataSource)
     return(
     /*  <Drawer
 
@@ -166,12 +176,12 @@ console.log('hey your score is=',scoreCalculate)
       </View>
       <View style={styles.questionSetContainer}>
         <ScrollView style={{backgroundColor:'white',flex:1}}>
-          {this.state.singleData!==null?
+          {this.state.dataSource.length>0?
+
       <View style={styles.container}>
         <View style={styles.mainView}>
           <View style={styles.questionContainer}>
             <Text style={styles.questionText}>
-
               {this.state.singleData.qTitle}
             </Text>
           </View>
@@ -233,14 +243,14 @@ console.log('hey your score is=',scoreCalculate)
           </View>
         </View>
       </View>
-      :null}
+      :<Loader/>}
     </ScrollView>
       </View>
       <View style={styles.buttonContainer}>
         <Button onPress={()=>{this._decrementIndex()}} style={styles.prevButton} >
           <Image source={images.iconTestBack} style={styles.iconPrevNext} />
         </Button>
-        <View style={styles.submitContainer}><Text style={styles.submitText}>SUBMIT</Text></View>
+        <TouchableOpacity onPress={()=>{this.submitTest()}} style={styles.submitContainer}><Text style={styles.submitText}>SUBMIT</Text></TouchableOpacity>
         <Button style={styles.nextButton} onPress={()=>{this._incrementIndex()}}>
           <Image source={images.iconTestNext} style={styles.iconPrevNext} />
         </Button>

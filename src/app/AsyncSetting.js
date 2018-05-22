@@ -24,7 +24,6 @@ export default class AsyncSetting {
   //  console.log('value for set',val)
     return value;
   }
-
   static async getGuestFlag() {
     //  return this.getBoolean('isGuest');
       const value = await this.getValue('isGuest');
@@ -40,6 +39,13 @@ export default class AsyncSetting {
     return this.setValue('isGuest', flagname);
   }
 
+ static setUrl(url){
+   return this.setValue('imgUrl', url);
+ }
+ static async getUrl() {
+   return this.getValue('imgUrl');
+
+ }
   static async getuthenticationUserFlag() {
     return this.getBoolean('isAuthenticateUser');
   }

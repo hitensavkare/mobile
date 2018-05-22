@@ -6,7 +6,8 @@ import {
   View,
   Picker,
   TouchableOpacity,
-  Image
+  Image,
+  AsyncStorage
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import HeaderTest from './HeaderTest'
@@ -31,10 +32,21 @@ class PrevQuestionPaper extends Component{
       })
     })
   }
+
   getPapers(id){
 //    alert(id)
+AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
+if(value==='false'){
+  Actions.Login()
+}
+else{
     Actions.Years({tagId:id})
+}
+})
+
+
   }
+
   render(){
   //  console.log('hey data',this.state.dataSource);
     return(

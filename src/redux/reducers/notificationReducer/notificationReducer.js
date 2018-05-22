@@ -2,7 +2,7 @@ import createReducer from '../../../app/createReducer'
 import * as constants from '../../actions/notificationActions/constants'
 
 const intialState={
-  notifyData:[],
+  notificationData:[],
 };
 
 export const notificationReducer=createReducer(intialState,{
@@ -13,7 +13,7 @@ export const notificationReducer=createReducer(intialState,{
  },
   [constants.GET_NOTIFICATION](state,action){
     return Object.assign({},state,{
-      notifyData:action.notifyData
+      notificationData:action.notifyDataa
     })
  },
  });
