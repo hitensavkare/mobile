@@ -1,2 +1,4 @@
 export const START_ACTIONS='START_ACTIONS';
 export const GET_FEEDBACK='GET_FEEDBACK';
+export const SET_QUERY='SET_QUERY';
+export const CHANGE_PASSWORD='CHANGE_PASSWORD';

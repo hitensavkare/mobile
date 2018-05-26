@@ -9,27 +9,27 @@ class Api {
   }
 
   static get(route) {
-    return this.mindCentralExplorer(route, null,'GET');
+    return this.jobSarthiExplorer(route, null,'GET');
   }
 
   static put(route, params) {
-    return this.mindCentralExplorer(route, params, 'PUT')
+    return this.jobSarthiExplorer(route, params, 'PUT')
   }
 
   static post(route, params) {
-    return this.mindCentralExplorer(route, params,'POST')
+    return this.jobSarthiExplorer(route, params,'POST')
   }
   static postWithToken(route, params,token) {
-    return this.mindCentralExplorer(route, params,token, 'POST',)
+    return this.jobSarthiExplorer(route, params,token, 'POST',)
   }
 
   static delete(route, params) {
-    return this.mindCentralExplorer(route, params, 'DELETE')
+    return this.jobSarthiExplorer(route, params, 'DELETE')
   }
 
-  static mindCentralExplorer(route, params,verb,) {
-    //const host = 'http://www.jobsarthii.com/Backend/api'
-    const host = 'http://192.168.43.109:91/JobSarthi/Backend/api'
+  static jobSarthiExplorer(route, params,verb,) {
+    const host = 'http://www.jobsarthii.com/Backend/api'
+    //const host = 'http://192.168.43.109:91/JobSarthi/Backend/api'
     const url = `${host}${route}`
     console.log(url)
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );

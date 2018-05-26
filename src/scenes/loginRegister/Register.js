@@ -16,6 +16,7 @@ import styles from './Register.style'
 import {images,colors} from '../../theme'
 import Statusbar from '../../components/Statusbar'
 import {bindActionCreators} from  'redux';
+import { AsyncStorage } from 'react-native';
 import {ActionCreators} from '../../redux/actions';
 import ImagePicker from 'react-native-image-crop-picker';
 import {connect} from 'react-redux';
@@ -31,12 +32,14 @@ class Register extends Component{
       gender:'NA',
       education:'NA',
       modalVisible:false,
-      email:'',
+      email:null,
       avatarSource:null,
       avtarbase64:null,
       name:'',
       isEmailFormatValid:null,
       loading:false,
+      dataSource:null,
+      flag:false
 
     }
     PushNotification.configure({
@@ -50,6 +53,31 @@ class Register extends Component{
       //console.log( 'NOTIFICATION Received:', notification );
     },
   })
+  }
+
+  componentDidMount(){
+
+    if(this.props.operation==='update'){
+      AsyncStorage.getItem('id').then((value)=>{
+      //  alert(value)
+        this.props.getProfileInfo({id:value}).then(()=>{
+          this.setState({
+            email:this.props.userData.email,
+            name:this.props.userData.name,
+            gender:this.props.userData.gender,
+            education:this.props.userData.education,
+            avatarSource:this.props.userData.url,
+            flag:true,
+          })
+        })
+    })
+
+    }
+    else{
+      this.setState({
+    flag:true
+      })
+    }
   }
   //code for email validation
   _validateEmail(email){
@@ -180,8 +208,27 @@ _renderNameError(){
   )
 }
 
-_gotoHomeMainWithLoginScreen(){
-  if(this._validateName(this.state.name)===true && this._validateEmail(this.state.email)===true && this.state.gender!=='NA' && this.state.education!=='NA'){
+_gotoHomeMainWithLoginScreen(operation){
+  if(operation==='update'){
+    if(this._validateName(this.state.name)===true && this._validateEmail(this.state.email)===true && this.state.gender!=='NA' && this.state.education!=='NA')
+    {
+      this.setState({
+        loading:true
+      })
+      let data={profilepic:this.state.avtarbase64,mail:this.state.email,fullname:this.state.name,gender:this.state.gender,education:this.state.education}
+      this.props.updateProfile(data).then(()=>{
+        this.setState({
+          loading:false
+        })
+      })
+  }
+}
+  else if(this.state.gender==='NA' && this.state.education==='NA'){
+    alert('You are missing something, please fill all details')
+  }
+  else{
+  if(this._validateName(this.state.name)===true && this._validateEmail(this.state.email)===true && this.state.gender!=='NA' && this.state.education!=='NA')
+  {
     this.setState({
       loading:true
     })
@@ -192,16 +239,18 @@ _gotoHomeMainWithLoginScreen(){
       })
     })
   }
-  else if(this.state.gender==='NA' && this.state.education==='NA'){
-    alert('You are missing something, please fill all details')
   }
-
 }
+
   render(){
+    //alert(this.state.dataSource)
     return(
       <View style={styles.container}>
           <Statusbar/>
-          <HeaderLogin onPress={()=>{Actions.pop()}} pageName='Register'/>
+          {this.props.operation==='update'?<HeaderLogin onPress={()=>{Actions.pop()}} pageName='Update Profile'/>:
+        <HeaderLogin onPress={()=>{Actions.pop()}} pageName='Register'/>}
+
+        {this.state.flag===false?<Loader/>:
           <View style={styles.subContainer}>
             <View style={styles.rowContainer}>
               <TouchableOpacity style={styles.profileimgContainer} onPress={()=>{this._toggleModal(!this.state.modalVisible)}}>
@@ -214,7 +263,9 @@ _gotoHomeMainWithLoginScreen(){
               </TouchableOpacity>
               <View style={styles.nameContainer}>
                 <TextInput placeholder='Your Name'
-                    ref='name'
+                  ref='name'
+                  value={this.state.name}
+
                   placeholderTextColor={colors.gray}
                   style={styles.textInput}
                   onChangeText={(name)=>{this._validateName(name)}}
@@ -225,6 +276,8 @@ _gotoHomeMainWithLoginScreen(){
             <View style={styles.singleRecord}>
               <TextInput placeholder='Your Email'
                 ref='MyEmail'
+                value={this.state.email}
+                editable={this.props.operation==='update'?false:true}
                 onChangeText={(email)=>{this._validateEmail(email)}}
                 placeholderTextColor={colors.gray}
                 style={styles.textInput}
@@ -254,14 +307,22 @@ _gotoHomeMainWithLoginScreen(){
             </View>
 
             <View style={styles.registerView}>
-              <Button light style={styles.registerButton} onPress={()=>{this._gotoHomeMainWithLoginScreen()}}  >
+              {this.props.operation==='update'?
+              <Button light style={styles.registerButton} onPress={()=>{this._gotoHomeMainWithLoginScreen('update')}}  >
+                <Text style={styles.loginText}>
+                  Update
+                </Text>
+              </Button>:
+              <Button light style={styles.registerButton} onPress={()=>{this._gotoHomeMainWithLoginScreen(null)}}  >
                 <Text style={styles.loginText}>
                   REGISTER
                 </Text>
               </Button>
+            }
             </View>
               {this.state.loading===true?<Loader/>:null}
           </View>
+        }
            {this._renderChooseAvatarModal()}
       </View>
     )
@@ -270,7 +331,7 @@ _gotoHomeMainWithLoginScreen(){
 
 const mapStateToProps=state=>{
   return{
-    adsSource:state.jobReducer.adsSource,
+    userData:state.authenticationReducer.userData,
   }
 }
 function mapDispatchToProps(dispatch){

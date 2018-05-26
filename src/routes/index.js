@@ -11,6 +11,7 @@ import SingleJob from '../scenes/home/SingleJob'
 import Flash from '../scenes/flash'
 import Intro from '../scenes/introduction'
 import MainScreen from '../scenes'
+import ForgotPassword from '../scenes/loginRegister/ForgotPassword'
 import Login from '../scenes/loginRegister'
 import Register from '../scenes/loginRegister/Register'
 import Comments from '../scenes/discuss/Comments'
@@ -32,6 +33,7 @@ import ResultAnalysis from '../scenes/DrawerScreen/ResultAnalysis';
 import Settings from '../scenes/settings';
 import EditProfile from '../scenes/settings/EditProfile';
 import Notifications from '../scenes/settings/Notifications';
+import ResetPassword from '../scenes/settings/ResetPassword';
 let val1,val2;
 class AppRoute extends Component{
   constructor(props){
@@ -93,6 +95,9 @@ class AppRoute extends Component{
           <Scene key='Notifications' component={Notifications}/>
           <Scene key='Result' component={Result}/>
           <Scene key='Instruction' component={Instruction}/>
+          <Scene key='ResetPassword' component={ResetPassword}/>
+          <Scene key='ForgotPassword' component={ForgotPassword}/>
+
 
      </Scene>
    )

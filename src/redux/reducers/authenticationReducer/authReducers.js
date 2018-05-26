@@ -25,4 +25,9 @@ export const authenticationReducer=createReducer(intialState,{
     userData:action.userData,
   })
 },
+[constants.FORGOT_PASSWORD](state,action){
+  return Object.assign({},state,{
+  })
+},
+
  });

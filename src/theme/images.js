@@ -55,5 +55,6 @@ const images={
     iconEditProfile:require('../assets/images/useredit.jpg'),
     iconComment:require('../assets/images/comment.jpg'),
     guestImg:require('../assets/images/drawer.jpg'),
+    resetPassIcon:require('../assets/images/resetpass.jpg'),
 };
 export default images;

@@ -27,13 +27,13 @@ class Settings extends Component {
     return (
       <ScrollView style={styles.scrollableView} showsVerticalScrollIndicator={false}>
         <View style={styles.listViewMain}>
-          <TouchableOpacity style={styles.listView} onPress={() => Actions.EditProfile()}>
+          <TouchableOpacity style={styles.listView} onPress={() => Actions.Register({operation:'update'})}>
                <Image source={images.iconEditProfile} style={styles.iconPics}></Image>
              <Text style={[styles.listTitle, styles.mdLeftSpace]}>Edit Profile</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.listView} onPress={() => Actions.Notifications()}>
-               <Image source={images.iconNotification} style={styles.iconPics}></Image>
-             <Text style={[styles.listTitle, styles.mdLeftSpace]}>Notifications</Text>
+          <TouchableOpacity style={styles.listView} onPress={() => Actions.ResetPassword()}>
+               <Image source={images.resetPassIcon} style={styles.iconPics}></Image>
+             <Text style={[styles.listTitle, styles.mdLeftSpace]}>Reset Password</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

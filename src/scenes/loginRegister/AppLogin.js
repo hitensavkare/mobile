@@ -20,12 +20,14 @@ import {connect} from 'react-redux';
 let  token=null;
 import keys from '../../app/keys'
 var PushNotification = require('react-native-push-notification');
+import Loader from '@components/Loader'
 class AppLogin extends Component{
   constructor(props){
     super(props)
     this.state={
       email:null,
       password:null,
+      loading:false,
     }
     PushNotification.configure({
       senderID:keys.push_notification_sender_id,
@@ -43,10 +45,17 @@ class AppLogin extends Component{
     Actions.Register();
   }
   _goToForgerPassword(){
-    alert('clicked forget password')
+    Actions.ForgotPassword()
   }
   _gotoHomeMainWithLoginScreen(){
-   this.props.authUser({email:this.state.email,password:this.state.password})
+    this.setState({
+      loading:true
+    })
+   this.props.authUser({email:this.state.email,password:this.state.password}).then(()=>{
+     this.setState({
+       loading:false
+     })
+   })
   }
   render(){
     return(
@@ -73,6 +82,7 @@ class AppLogin extends Component{
                  </Text>
                </Button>
              </View>
+               {this.state.loading===true?<Loader/>:null}
              <View style={styles.forgetPassView}>
                <Text style={styles.forgetPass} onPress={() => this._goToForgerPassword()}>Forgot Password?</Text>
              </View>
@@ -119,6 +129,7 @@ class AppLogin extends Component{
                          </View>
                        </TouchableOpacity>
                      </View>
+
                    </View>
                  </View>
                </CardItem>
@@ -132,7 +143,7 @@ class AppLogin extends Component{
 
 const mapStateToProps=state=>{
   return{
-    adsSource:state.jobReducer.adsSource,
+
   }
 }
 function mapDispatchToProps(dispatch){

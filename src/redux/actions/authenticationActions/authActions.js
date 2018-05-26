@@ -2,6 +2,7 @@ import * as constants from './constants'
 import Api from '../../../app/api'
 import AsyncSetting from '../../../app/AsyncSetting'
 import {Actions} from 'react-native-router-flux';
+import {ToastAndroid} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import FBSDK,{LoginManager,AccessToken} from 'react-native-fbsdk'
@@ -29,7 +30,11 @@ export function actionUserLogin(userData){
     userData,
   };
 }
-
+export function actionForgotPassword(){
+  return{
+    type:constants.FORGOT_PASSWORD
+  }
+}
 export function setGuestUser(data){
   return (dispatch,getState) => {
       dispatch(startRequest())
@@ -68,10 +73,7 @@ export function registerUser(data){
             message: "Login credentials sent on your email id, please check it.", // (required)
             soundName: 'default',
           })
-          AsyncSetting.setAuthenticationUserFlag('true')
-          AsyncSetting.setId(resp._id)
-          AsyncSetting.setUrl(resp.url)
-            Actions.Login();
+          Actions.Login({type:'reset'});
         }
       }).catch((ex) => {
         console.log('------errror-------',ex);
@@ -107,6 +109,78 @@ export function authUser(data){
   }
 }
 
+export function getProfileInfo(data){
+  console.log('hey data',data);
+  return (dispatch,getState) => {
+      dispatch(startRequest())
+      return Api.post(`/getProfile.php`,data).then(resp => {
+        if(resp.status==='err'){
+          //dispatch(actionSetError())
+          alert(resp.message)
+        }
+        else{
+          //AsyncSetting.setAuthenticationUserFlag('true')
+        //  AsyncSetting.setId(resp._id)
+          AsyncSetting.setUrl(resp.url)
+          //  alert(resp.url)
+          dispatch(actionUserLogin(resp))
+
+            console.log('--------got the response---------',resp)
+        }
+
+      }).catch((ex) => {
+        //console.log('------errror-------',ex);
+        actionSetError(ex)
+      })
+  }
+}
+export function updateProfile(data){
+  console.log('hey data',data);
+  return (dispatch,getState) => {
+      dispatch(startRequest())
+      return Api.post(`/updateProfile.php`,data).then(resp => {
+        if(resp.status==='err'){
+          //dispatch(actionSetError())
+          alert(resp.message)
+        }
+        else{
+          //AsyncSetting.setAuthenticationUserFlag('true')
+        //  AsyncSetting.setId(resp._id)
+          AsyncSetting.setUrl(resp.url)
+          Actions.MainScreen();
+          //  alert(resp.url)
+            console.log('--------got the response---------',resp)
+        }
+
+      }).catch((ex) => {
+        //console.log('------errror-------',ex);
+        actionSetError(ex)
+      })
+  }
+}
+
+//forgot password
+export function forgotPassword(data){
+  console.log('hey data',data);
+  return (dispatch,getState) => {
+      dispatch(startRequest())
+      return Api.post(`/forgotPassowrd.php`,data).then(resp => {
+        if(resp.status==='err'){
+          //dispatch(actionSetError())
+          alert(resp.message)
+        }
+        else{
+            dispatch(actionForgotPassword());
+            ToastAndroid.show(resp.message, ToastAndroid.SHORT);
+            Actions.pop();
+            console.log('--------got the response---------',resp)
+        }
+
+      }).catch((ex) => {
+        actionSetError(ex)
+      })
+  }
+}
 //Facebook authentication
 export function fbAuth(token){
   return (dispatch) => {

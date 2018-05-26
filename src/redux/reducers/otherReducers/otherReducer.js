@@ -14,4 +14,15 @@ export const otherReducer=createReducer(intialState,{
 
    })
 },
+[constants.SET_QUERY](state,action){
+  return Object.assign({},state,{
+
+  })
+},
+[constants.CHANGE_PASSWORD](state,action){
+  return Object.assign({},state,{
+
+  })
+},
+
  });

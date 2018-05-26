@@ -1,12 +1,23 @@
 import React,{Component} from 'react'
 import { Header,Icon,Drawer } from 'native-base';
-import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native'
+import {View,Text,StyleSheet,TouchableOpacity,Image,AsyncStorage} from 'react-native'
 import {colors,appFonts,images} from '../theme'
 import DrawerView from './DrawerView'
 
 class MainHeader extends Component{
+constructor(props){
+  super(props)
+  this.state={
+    id:null
+  }
+}
 
-
+componentWillMount(){
+        AsyncStorage.getItem('id').then((value)=>{
+          //alert(value)
+          this.setState({id:value})
+        })
+}
   render(){
     return(
 
@@ -20,9 +31,11 @@ class MainHeader extends Component{
             JobSarthi
           </Text>
           </View>
+          {this.state.id===null || this.state.id==='undefined'?<View></View>:
           <TouchableOpacity style={{flex:0.5,justifyContent:'center',alignItems:'center'}} onPress={this.props.settings}>
           <Image source={images.iconSettings} style={styles.settingIcon}/>
         </TouchableOpacity>
+      }
         </View>
       </Header>
 

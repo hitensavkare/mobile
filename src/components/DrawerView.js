@@ -25,6 +25,7 @@ class DrawerView extends Component{
   })
 
     AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
+      alert(value)
     this.setState({isAuthUser:value})
   })
 
@@ -35,6 +36,7 @@ class DrawerView extends Component{
     AsyncSetting.setAuthenticationUserFlag('false');
     AsyncSetting.setGuestFlag('false')
       AsyncSetting.setUrl(null)
+      AsyncSetting.setId(null)
     Actions.Intro({type:'reset'})
   //  console.log('hey flag',      AsyncSetting.getuthenticationUserFlag())
     //  console.log('hey gues inside method',      AsyncSetting.getGuestFlag())*/
@@ -45,11 +47,12 @@ class DrawerView extends Component{
 
   }
   render(){
-console.log('hello image',this.state.imgUrl)
+    //alert(this.state.isAuthUser)
+  //  alert(this.state.imgUrl)
     return(
       <View style={styles.container}>
         <View style={styles.profileContainer}>
-          {this.state.imgUrl==='null'?
+          {this.state.imgUrl==='null' || this.state.imgUrl===null || this.state.imgUrl==='' || this.state.imgUrl==='undefined'?
             <Image source={images.guestImg} style={styles.profileImage}/>
             :
             <Image source={{uri:this.state.imgUrl}} style={styles.profileImage}/>
@@ -97,7 +100,7 @@ console.log('hello image',this.state.imgUrl)
             feedback
             </Text>
           </TouchableOpacity>
-          {this.state.isAuthUser==='false'?
+          {this.state.isAuthUser===false?
           <TouchableOpacity  onPress={()=>{Actions.Login()}}  style={styles.contentRow}>
             <Image source={images.iconLogin} style={styles.contentIcon}/>
             <Text style={styles.contentText}>
