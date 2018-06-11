@@ -2,7 +2,7 @@ const images={
   iconFacebook:require('../assets/images/facebook.png'),
   iconGoogle:require('../assets/images/google.png'),
   iconRegister:require('../assets/images/register.png'),
-  iconNotification:require('../assets/images/ic_notif_active.png'),
+  iconNotification:require('../assets/images/notification.jpg'),
       profileImage:require('../assets/images/aa.jpg'),
       homeActive:require('../assets/images/homeactive.gif'),
       homeInactive:require('../assets/images/home.gif'),

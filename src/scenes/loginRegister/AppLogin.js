@@ -41,6 +41,9 @@ class AppLogin extends Component{
     },
   })
   }
+  _fbAuth=()=>{
+    this.props.fbAuth(token)
+  }
   _goToRegister(){
     Actions.Register();
   }
@@ -89,7 +92,7 @@ class AppLogin extends Component{
 
              <View style={styles.buttonMainView}>
                <View style={styles.buttonView}>
-                 <Button onPress={()=>{this.props.fbAuth(token)}} light style={styles.socialButtons}>
+                 <Button onPress={this._fbAuth} light style={styles.socialButtons}>
                    <View style={{flex:0.4,justifyContent:'center',alignItems:'center'}}>
                      <Image source={images.iconFacebook} style={styles.fbIcon}/>
                    </View>
@@ -143,7 +146,7 @@ class AppLogin extends Component{
 
 const mapStateToProps=state=>{
   return{
-
+   isLoading:state.authenticationReducer.isLoading
   }
 }
 function mapDispatchToProps(dispatch){

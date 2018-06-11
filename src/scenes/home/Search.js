@@ -14,7 +14,7 @@ import HeaderHome from './HeaderHome'
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
-
+import admobIds from '../../common/admobIds'
 class Search extends Component{
   constructor(props){
     super(props);
@@ -101,7 +101,9 @@ class Search extends Component{
               <Picker.Item label="Uttarakhand" value="Uttarakhand" />
               <Picker.Item label="West Bengal" value="West Bengal" />
           </Picker>
+
         </View>
+
       </View>
     )
   }

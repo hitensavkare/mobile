@@ -8,15 +8,15 @@ class MainHeader extends Component{
 constructor(props){
   super(props)
   this.state={
-    id:null
+    isAuthUser:null
   }
 }
 
-componentWillMount(){
-        AsyncStorage.getItem('id').then((value)=>{
-          //alert(value)
-          this.setState({id:value})
-        })
+componentDidMount(){
+  AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
+    //alert(value)
+  this.setState({isAuthUser:value})
+})
 }
   render(){
     return(
@@ -31,7 +31,7 @@ componentWillMount(){
             JobSarthi
           </Text>
           </View>
-          {this.state.id===null || this.state.id==='undefined'?<View></View>:
+          {this.state.isAuthUser==='false' || this.state.id==='undefined'?<View></View>:
           <TouchableOpacity style={{flex:0.5,justifyContent:'center',alignItems:'center'}} onPress={this.props.settings}>
           <Image source={images.iconSettings} style={styles.settingIcon}/>
         </TouchableOpacity>

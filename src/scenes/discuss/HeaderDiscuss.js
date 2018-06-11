@@ -14,7 +14,7 @@ class HeaderDiscuss extends Component{
           <Text style={styles.headerText}>
             {this.props.pageName}
           </Text>
-          <TouchableOpacity style={styles.rightButton}>
+          <TouchableOpacity onPress={this.props.postAction} style={styles.rightButton}>
             <Text style={styles.leftButton}>{this.props.rightButton}</Text>
           </TouchableOpacity>
         </View>

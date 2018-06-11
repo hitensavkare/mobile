@@ -9,7 +9,13 @@ import FBSDK,{LoginManager,AccessToken} from 'react-native-fbsdk'
 var PushNotification = require('react-native-push-notification');
 export function startRequest(){
   return{
-    type: constants.START_AUTH
+    type: constants.START_REQUEST
+  };
+}
+export function startAuth(isLoading){
+  return{
+    type: constants.START_AUTH,
+    isLoading
   };
 }
 export function actionGuestUser(){
@@ -98,7 +104,7 @@ export function authUser(data){
             AsyncSetting.setUrl(resp.url)
           //  alert(resp.url)
           dispatch(actionUserLogin(resp))
-          Actions.MainScreen();
+          Actions.MainScreen({type:'reset'});
             console.log('--------got the response---------',resp)
         }
 
@@ -147,7 +153,7 @@ export function updateProfile(data){
           //AsyncSetting.setAuthenticationUserFlag('true')
         //  AsyncSetting.setId(resp._id)
           AsyncSetting.setUrl(resp.url)
-          Actions.MainScreen();
+          Actions.MainScreen({type:'reset'});
           //  alert(resp.url)
             console.log('--------got the response---------',resp)
         }
@@ -184,7 +190,7 @@ export function forgotPassword(data){
 //Facebook authentication
 export function fbAuth(token){
   return (dispatch) => {
-    //  dispatch(authStarted(false,true));
+    console.log('hey started i am');
     LoginManager.logInWithReadPermissions(['email','user_birthday'])
     .then(function(result){
       if(result.isCancelled){
@@ -192,15 +198,22 @@ export function fbAuth(token){
       }
       else{
         AccessToken.getCurrentAccessToken().then((data) => {
+          //dispatch(authStarted(true));
          const { accessToken } = data
          console.log('--------token obtain------',accessToken);
          fetch('https://graph.facebook.com/v2.5/me?fields=picture.height(2048),birthday,name,email,gender&access_token=' + accessToken)
          .then((response) => response.json())
          .then((json) => {
             console.log("get the fb data",json);
-           const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:json.name,mail:json.email,profilepic:json.picture.data.url,gender:json.gender,birthDay:json.birthday,provider:'Facebook'}
+           const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:json.name,mail:json.email,profilepic:json.picture.data.url,gender:'',birthDay:json.birthday,provider:'Facebook'}
 
-           return Api.post(`/register.php`,dataT).then(respData => {
+           return Api.post(`/register.php`,dataT).then(resp => {
+             console.log('response',resp);
+             AsyncSetting.setAuthenticationUserFlag('true')
+             AsyncSetting.setId(resp._id)
+               AsyncSetting.setUrl(resp.url)
+              // alert(resp.url)
+             dispatch(actionUserLogin(resp))
               Actions.MainScreen();
            })
 
@@ -209,7 +222,7 @@ export function fbAuth(token){
       }
     }).catch((ex) => {
       console.log('------errror-------',ex);
-      authFailure(ex,false,false)
+    //  authFailure(ex,false,false)
     });
 
   }
@@ -230,13 +243,26 @@ GoogleSignin.configure({
               console.log('----google response-------------',user);
               //dispatch(authSuccess(true,user.name,user.photo,true));
               const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:user.name,mail:user.email,profilepic:user.photo,gender:null,birthDay:null,provider:'Google'}
+              console.log('dataT',dataT)
+
+              return Api.post(`/register.php`,dataT).then(resp => {
+                console.log('response',resp);
+                AsyncSetting.setAuthenticationUserFlag('true')
+                AsyncSetting.setId(resp._id)
+                  AsyncSetting.setUrl(resp.url)
+                //  alert(resp.url)
+                dispatch(actionUserLogin(resp))
+                 Actions.MainScreen({type:'reset'});
+              })
+
               /*return Api.post(`/mobileSocialLogin`,dataT).then(respData => {
                 dispatch(authSuccess(true,user.name,user.photo,null,null,'google','therapist',respData.authToken,user.email,null));
                 Actions.Home({ type:'reset',isUnsheduleVisible:false,selectedPage:'First', flag:'month'})
               })*/
             })
             .catch((err) => {
-            dispatch(authFailure(err,false,false));
+                console.log('------errror-------',ex);
+            //dispatch(authFailure(err,false,false));
             }).done();
     })
   }

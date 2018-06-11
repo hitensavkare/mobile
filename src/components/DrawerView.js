@@ -21,11 +21,12 @@ class DrawerView extends Component{
   componentDidMount(){
 
     AsyncStorage.getItem('imgUrl').then((value)=>{
+      //alert(value)
   this.setState({imgUrl:value})
   })
 
     AsyncStorage.getItem('isAuthenticateUser').then((value)=>{
-      alert(value)
+      //alert(value)
     this.setState({isAuthUser:value})
   })
 
@@ -100,7 +101,7 @@ class DrawerView extends Component{
             feedback
             </Text>
           </TouchableOpacity>
-          {this.state.isAuthUser===false?
+          {this.state.isAuthUser==='false'?
           <TouchableOpacity  onPress={()=>{Actions.Login()}}  style={styles.contentRow}>
             <Image source={images.iconLogin} style={styles.contentIcon}/>
             <Text style={styles.contentText}>

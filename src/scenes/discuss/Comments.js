@@ -7,28 +7,40 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  TextInput
+  TextInput,
+  AsyncStorage
 } from 'react-native'
 import {Header} from 'native-base';
 import {images} from '../../theme'
 import Statusbar from '../../components/Statusbar'
 import styles from './Discuss.styles'
 import Comment from '@components/question/Comment'
+import {bindActionCreators} from  'redux';
+import {ActionCreators} from '../../redux/actions';
+import {connect} from 'react-redux';
+
 class Comments extends Component{
   constructor(props){
     super(props);
     this.state={
       isCommentVisible:false,
       dataSource:[],
+      _id:null,
     }
   }
   componentDidMount(){
-    this.setState({
-      dataSource:[{id:1,isAccepted:false},{id:2,isAccepted:true},{id:3,isAccepted:false},{id:4,isAccepted:false}]
-    })
+      AsyncStorage.getItem('id').then((value)=>{
+        this.setState({_id:value})
+        })
+        const data={id:this.state._id,questionId:this.props.questionPostId}
+        this.props.getComments(data).then(()=>{
+            this.setState({dataSource:this.props.commentData  })
+        })
   }
+
   componentDidUpdate(){
   }
+
   _putComment(){
     let arrayData=this.state.dataSource;
     arrayData.push({id:5});
@@ -37,6 +49,7 @@ class Comments extends Component{
     })
   }
   render(){
+    const {data}=this.state.dataSource;
     return(
     <View style={styles.commentMainContainer}>
       <Statusbar/>
@@ -59,7 +72,7 @@ class Comments extends Component{
         <FlatList
           data={this.state.dataSource}
           renderItem={({item})=>(<Comment data={item}/>)}
-          keyExtractor={(item,index)=>index}
+          keyExtractor={(item,index)=>index.toString()}
         />
       </View>
       <View style={styles.commentBox}>
@@ -78,4 +91,13 @@ class Comments extends Component{
   )
   }
 }
-export default Comments;
+const mapStateToProps=state=>{
+  return{
+      commentData:state.discussReducer.commentData,
+
+  }
+}
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators,dispatch)
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Comments);

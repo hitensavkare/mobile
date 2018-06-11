@@ -28,15 +28,14 @@ class Api {
   }
 
   static jobSarthiExplorer(route, params,verb,) {
-    const host = 'http://www.jobsarthii.com/Backend/api'
-    //const host = 'http://192.168.43.109:91/JobSarthi/Backend/api'
+    //const host = 'http://www.jobsarthii.com/Backend/api'
+    const host = 'http://192.168.2.9:91/JobSarthi/Backend/api'
     const url = `${host}${route}`
     console.log(url)
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );
     //options.headers = Api.headers(token)
       options.headers = Api.headers()
-    //console.log('---------Data inside api-----',params)
-    //console.log('-------header called-------',Api.headers(token))
+    //console.log('---------Data inside api-----',parabeaders(token))
     return fetch(url, options).then( resp => {
       //console.log('-----my Response-----',resp)
       let json = resp.json();

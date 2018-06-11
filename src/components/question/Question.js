@@ -19,21 +19,24 @@ import styles from '../screenStyles/Question.style'
 class Question extends Component{
 constructor(props){
   super(props);
+  console.log('hey props',this.props.data);
   }
-  _gotoCommentScreen(){
-    Actions.Comments()
-  }
+
+_gotoComment(id){
+  this.props._gotoCommentScreen(id)
+}
   render(){
+    const data=this.props.data
     return(
-        <View style={styles.mainQuestionContainer}>
+        <View style={styles.mainQuestionContainer} key={data._id}>
           <View style={styles.QuestionContainer}>
             <View style={styles.questionView}>
-            <Text style={styles.text}>Explain the cast system during Akbar king?-
-              <Text style={styles.personNameText}>Asked by:Hitendra Savkare</Text>
+            <Text style={styles.text}>{data.questionDef}-
+              <Text style={styles.personNameText}>Asked by:{data.userName}</Text>
             </Text>
             <View style={{flexDirection: 'row'}}>
-            <Text style={styles.viewMoretext}>Sci & Tech </Text>
-            <Text style={styles.dateText}>Posted on:22/03/2017</Text>
+            <Text style={styles.viewMoretext}>{data.tagName} </Text>
+            <Text style={styles.dateText}>Posted on:{data.created}</Text>
           </View>
           </View>
 
@@ -42,7 +45,7 @@ constructor(props){
             <TouchableOpacity style={{marginRight:16}}>
               <Image source={images.likesActive} style={{height:25,width:25}}/>
             </TouchableOpacity>
-            <TouchableOpacity style={{marginRight:16}} onPress={()=>{this._gotoCommentScreen()}}>
+            <TouchableOpacity style={{marginRight:16}} onPress={()=>this._gotoComment(data._id)}>
               <Image source={images.iconComment} style={{height:25,width:25}}/>
             </TouchableOpacity>
 
