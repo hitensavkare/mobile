@@ -47,7 +47,6 @@ _changeCommentSectionState(visible){
   })
 }
 _gotoCommentScreen=(id)=>{
-  alert(id)
   Actions.Comments({questionPostId:id})
 }
 

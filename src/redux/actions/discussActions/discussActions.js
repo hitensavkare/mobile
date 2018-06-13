@@ -25,6 +25,12 @@ export function actionGetComments(commentData){
     commentData,
   }
 }
+export function actionPostComment(comment){
+  return{
+    type:constants.POST_COMMENT_DATA,
+    comment,
+  }
+}
 
 export function postQuestion(data){
   console.log('hey postQuestion',data);
@@ -62,14 +68,31 @@ export function getPostedQuestion(data){
   }
 }
 
+
 export function getComments(data){
   return (dispatch,getState) => {
-      return Api.post(`/getComments.php`,data).then(resp => {
+    return Api.post(`/getComments.php`,data).then(resp => {
+      if(resp.status==='err'){
+        ToastAndroid.show(resp.message, ToastAndroid.SHORT)
+      }
+      else{
+        dispatch(actionGetComments(resp))
+      }
+      console.log('--------got the response---------',resp)
+    }).catch((ex) => {
+      console.log('------errror-------',ex);
+    })
+  }
+}
+//post user's comments
+export function postComment(data){
+  return (dispatch,getState) => {
+      return Api.post(`/postComment.php`,data).then(resp => {
         if(resp.status==='err'){
             ToastAndroid.show(resp.message, ToastAndroid.SHORT)
         }
         else{
-            dispatch(actionGetComments(resp))
+            dispatch(actionPostComment(resp))
         }
         console.log('--------got the response---------',resp)
       }).catch((ex) => {

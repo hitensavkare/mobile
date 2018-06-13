@@ -24,5 +24,10 @@ export const discussReducer=createReducer(intialState,{
        commentData:action.commentData
    })
  },
+ [constants.POST_COMMENT_DATA](state,action){
+   return Object.assign({},state,{
+       commentData:action.comment
+   })
+ },
 
 });

@@ -3,7 +3,7 @@ const images={
   iconGoogle:require('../assets/images/google.png'),
   iconRegister:require('../assets/images/register.png'),
   iconNotification:require('../assets/images/notification.jpg'),
-      profileImage:require('../assets/images/aa.jpg'),
+      profileImage:require('../assets/images/profile.jpg'),
       homeActive:require('../assets/images/homeactive.gif'),
       homeInactive:require('../assets/images/home.gif'),
   icoDiscussActive:require('../assets/images/discussionActive.gif'),

@@ -26,6 +26,7 @@ class Comments extends Component{
       isCommentVisible:false,
       dataSource:[],
       _id:null,
+      comment:''
     }
   }
   componentDidMount(){
@@ -34,18 +35,17 @@ class Comments extends Component{
         })
         const data={id:this.state._id,questionId:this.props.questionPostId}
         this.props.getComments(data).then(()=>{
-            this.setState({dataSource:this.props.commentData  })
+            this.setState({dataSource:this.props.commentData})
         })
   }
 
   componentDidUpdate(){
   }
 
-  _putComment(){
-    let arrayData=this.state.dataSource;
-    arrayData.push({id:5});
-    this.setState({
-      dataSource:arrayData
+  _putComment(value){
+    const data={id:this.state._id,comment:this.state.comment,questionId:value}
+    this.props.postComment(data).then(()=>{
+        this.setState({dataSource:this.props.commentData})
     })
   }
   render(){
@@ -78,11 +78,13 @@ class Comments extends Component{
       <View style={styles.commentBox}>
         <TextInput
           multiline={true}
+          onChangeText={(comment)=>{this.setState({comment})}}
           placeholder='Share Knowledge'
           style={styles.commentText}
+          maxLength={450}
          />
          <TouchableOpacity
-           onPress={()=>{this._putComment()}}
+           onPress={()=>{this._putComment(this.props.questionPostId)}}
            style={styles.sendButton}>
            <Text>SHARE</Text>
          </TouchableOpacity>
