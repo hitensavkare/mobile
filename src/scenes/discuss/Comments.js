@@ -28,6 +28,7 @@ class Comments extends Component{
       _id:null,
       comment:''
     }
+  //  alert(this.props.isAcceptFlag)
   }
   componentDidMount(){
       AsyncStorage.getItem('id').then((value)=>{
@@ -37,9 +38,11 @@ class Comments extends Component{
         this.props.getComments(data).then(()=>{
             this.setState({dataSource:this.props.commentData})
         })
+
   }
 
   componentDidUpdate(){
+
   }
 
   _putComment(value){
@@ -47,6 +50,15 @@ class Comments extends Component{
     this.props.postComment(data).then(()=>{
         this.setState({dataSource:this.props.commentData})
     })
+  }
+  getSilver(silver,commentorId,commentId){
+
+  }
+  getBronze(bronze,commentorId,commentId){
+
+  }
+  getSpam(spam,commentorId,commentId){
+
   }
   render(){
     const {data}=this.state.dataSource;
@@ -71,7 +83,12 @@ class Comments extends Component{
       <View style={{flex: 3.5,marginBottom:60}}>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item})=>(<Comment data={item}/>)}
+          renderItem={({item})=>(<Comment data={item}
+                                  _id={this.state._id}
+                                  isAcceptedFlag={this.props.isAcceptFlag}
+                                  setSilver={this.getSilver}
+                                  getBronze={this.getBronze}
+                                  getSpam={this.getSpam}/>)}
           keyExtractor={(item,index)=>index.toString()}
         />
       </View>
@@ -96,7 +113,6 @@ class Comments extends Component{
 const mapStateToProps=state=>{
   return{
       commentData:state.discussReducer.commentData,
-
   }
 }
 function mapDispatchToProps(dispatch){

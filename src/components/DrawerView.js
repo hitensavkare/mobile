@@ -21,7 +21,7 @@ class DrawerView extends Component{
   componentDidMount(){
 
     AsyncStorage.getItem('imgUrl').then((value)=>{
-      //alert(value)
+      console.log('feb image',value)
   this.setState({imgUrl:value})
   })
 

@@ -121,7 +121,7 @@ sendButtonText:{
   color:colors.appColor
 },
 float:{
-  position:'absolute',bottom:0,right:0,marginRight:10,
+
 },
 floatView:{
   height:70,

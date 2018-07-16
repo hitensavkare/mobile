@@ -206,7 +206,7 @@ export function fbAuth(token){
          .then((json) => {
             console.log("get the fb data",json);
            const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:json.name,mail:json.email,profilepic:json.picture.data.url,gender:'',birthDay:json.birthday,provider:'Facebook'}
-
+           console.log('hey data how are',dataT)
            return Api.post(`/register.php`,dataT).then(resp => {
              console.log('response',resp);
              AsyncSetting.setAuthenticationUserFlag('true')
@@ -240,6 +240,7 @@ GoogleSignin.configure({
 
        GoogleSignin.signIn()
             .then((user) => {
+              
               console.log('----google response-------------',user);
               //dispatch(authSuccess(true,user.name,user.photo,true));
               const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:user.name,mail:user.email,profilepic:user.photo,gender:null,birthDay:null,provider:'Google'}
@@ -261,7 +262,7 @@ GoogleSignin.configure({
               })*/
             })
             .catch((err) => {
-                console.log('------errror-------',ex);
+                console.log('------errror-------',err);
             //dispatch(authFailure(err,false,false));
             }).done();
     })

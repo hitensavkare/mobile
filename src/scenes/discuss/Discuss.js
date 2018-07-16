@@ -33,7 +33,7 @@ componentDidMount(){
       })
 
 }
-_gotoQuestionScreen(){
+_gotoQuestionScreen(value){
   if(value===null){
     Actions.Login()
   }
@@ -46,14 +46,14 @@ _changeCommentSectionState(visible){
     isCommentVisible:visible,
   })
 }
-_gotoCommentScreen=(id)=>{
-  Actions.Comments({questionPostId:id})
+_gotoCommentScreen=(id,isAccept)=>{
+  Actions.Comments({questionPostId:id,isAcceptFlag:isAccept})
 }
 
   render(){
     console.log('hey data',this.state.dataSource.length);
     return(
-      this.state.dataSource.length===0?null:
+
       <View style={styles.container}>
         <FlatList
           data={this.state.dataSource}
@@ -61,7 +61,7 @@ _gotoCommentScreen=(id)=>{
           keyExtractor={(item,index)=>index.toString()}
         />
         <View style={styles.float}>
-          <TouchableOpacity style={styles.floatView} onPress={()=>{this._gotoQuestionScreen()}}>
+          <TouchableOpacity style={styles.floatView} onPress={()=>{this._gotoQuestionScreen(this.state._id)}}>
             <Text style={styles.subHeadingText}>NEW</Text>
           </TouchableOpacity>
         </View>

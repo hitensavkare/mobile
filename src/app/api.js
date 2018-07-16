@@ -29,7 +29,7 @@ class Api {
 
   static jobSarthiExplorer(route, params,verb,) {
     //const host = 'http://www.jobsarthii.com/Backend/api'
-    const host = 'http://192.168.2.9:91/JobSarthi/Backend/api'
+    const host = 'http://192.168.1.102:91/JobSarthi/Backend/api'
     const url = `${host}${route}`
     console.log(url)
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );

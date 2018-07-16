@@ -31,7 +31,11 @@ export function actionPostComment(comment){
     comment,
   }
 }
-
+export function actionReward(){
+  return{
+    type:constants.POST_REWARD_REPORT
+  }
+}
 export function postQuestion(data){
   console.log('hey postQuestion',data);
   return (dispatch,getState) => {
@@ -70,6 +74,7 @@ export function getPostedQuestion(data){
 
 
 export function getComments(data){
+  console.log('hey data',data);
   return (dispatch,getState) => {
     return Api.post(`/getComments.php`,data).then(resp => {
       if(resp.status==='err'){
@@ -99,4 +104,19 @@ export function postComment(data){
         console.log('------errror-------',ex);
       })
   }
+}
+export function giveRewardOrReport(data){
+    return (dispatch,getState) => {
+        return Api.post(`/userActionOnPost.php`,data).then(resp => {
+          if(resp.status==='error'){
+              ToastAndroid.show(resp.message, ToastAndroid.SHORT)
+          }
+          else{
+              dispatch(actionReward(resp))
+          }
+          console.log('--------got the response---------',resp)
+        }).catch((ex) => {
+          console.log('------errror-------',ex);
+        })
+    }
 }

@@ -3,6 +3,7 @@ import * as constants from '../../actions/discussActions/constants'
 const intialState={
   postedQuestionDataSource:[],
   commentData:[],
+  isAccepted:null,
 };
 
 export const discussReducer=createReducer(intialState,{
@@ -20,14 +21,29 @@ export const discussReducer=createReducer(intialState,{
    })
  },
  [constants.GET_COMMENT_DATA](state,action){
-   return Object.assign({},state,{
+   if (action.commentData.some(e => e.isAccepted === 'true')) {
+     console.log('hey you fond it');
+     return Object.assign({},state,{
+        isAccepted:'true',
        commentData:action.commentData
-   })
+     })
+   }
+   else{
+      console.log('hey you not fond it');
+     return Object.assign({},state,{
+       isAccepted:'false',
+       commentData:action.commentData,
+
+     })
+   }
  },
  [constants.POST_COMMENT_DATA](state,action){
    return Object.assign({},state,{
        commentData:action.comment
    })
  },
-
+ [constants.POST_REWARD_REPORT](state,action){
+   return Object.assign({},state,{
+   })
+ },
 });

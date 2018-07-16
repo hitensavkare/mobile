@@ -22,13 +22,15 @@ constructor(props){
   console.log('hey props',this.props.data);
   }
 
-_gotoComment(id){
-  this.props._gotoCommentScreen(id)
+_gotoComment(id,isAccepted){
+  this.props._gotoCommentScreen(id,isAccepted)
 }
   render(){
     const data=this.props.data
     return(
         <View style={styles.mainQuestionContainer} key={data._id}>
+          <View style={{flexDirection: 'row'}}>
+            <View  style={{flex:3.5}}>
           <View style={styles.QuestionContainer}>
             <View style={styles.questionView}>
             <Text style={styles.text}>{data.questionDef}-
@@ -45,10 +47,20 @@ _gotoComment(id){
             <TouchableOpacity style={{marginRight:16}}>
               <Image source={images.likesActive} style={{height:25,width:25}}/>
             </TouchableOpacity>
-            <TouchableOpacity style={{marginRight:16}} onPress={()=>this._gotoComment(data._id)}>
+            <TouchableOpacity style={{marginRight:16}} onPress={()=>this._gotoComment(data._id,data.isAccepted)}>
               <Image source={images.iconComment} style={{height:25,width:25}}/>
             </TouchableOpacity>
 
+          </View>
+        </View>
+        <View style={{flex:0.5,justifyContent:'center',alignItems: 'flex-start'}}>
+          {data.isAccepted==='true'?
+          <TouchableOpacity style={styles.rewardTouch}>
+            <Image source={images.iconTick} style={styles.rewardIcon}/>
+          </TouchableOpacity>:
+          null}
+
+        </View>
           </View>
         </View>
     )
