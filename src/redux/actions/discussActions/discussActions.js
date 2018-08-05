@@ -31,9 +31,12 @@ export function actionPostComment(comment){
     comment,
   }
 }
-export function actionReward(){
+export function actionReward(bronze,silver,report){
   return{
-    type:constants.POST_REWARD_REPORT
+    type:constants.POST_REWARD_REPORT,
+    bronze,
+    silver,
+    report
   }
 }
 export function postQuestion(data){
@@ -46,7 +49,6 @@ export function postQuestion(data){
         }
         else{
           ToastAndroid.show(resp.message, ToastAndroid.SHORT);
-            dispatch(endAction())
           Actions.pop()
         }
         console.log('--------got the response---------',resp)
@@ -57,6 +59,7 @@ export function postQuestion(data){
 }
 
 export function getPostedQuestion(data){
+  console.log("hey json",data);
   return (dispatch,getState) => {
       return Api.post(`/getPostedQuestionList.php`,data).then(resp => {
         if(resp.status==='err'){
@@ -105,14 +108,32 @@ export function postComment(data){
       })
   }
 }
-export function giveRewardOrReport(data){
-    return (dispatch,getState) => {
-        return Api.post(`/userActionOnPost.php`,data).then(resp => {
-          if(resp.status==='error'){
+
+export function acceptAnswer(data){
+  console.log('hey data',data)
+      return (dispatch,getState) => {
+        return Api.post(`/acceptAns.php`,data).then(resp => {
+          if(resp.status==='err'){
               ToastAndroid.show(resp.message, ToastAndroid.SHORT)
           }
           else{
-              dispatch(actionReward(resp))
+            Actions.MainScreen({type:'reset',pageName:'discuss'});
+          }
+          console.log('--------got the response---------',resp)
+        }).catch((ex) => {
+          console.log('------errror-------',ex);
+        })
+    }
+}
+export function giveRewardOrReport(data){
+  console.log('hey reward',data);
+    return (dispatch,getState) => {
+        return Api.post(`/userActionOnPost.php`,data).then(resp => {
+          if(resp.status==='err'){
+              ToastAndroid.show(resp.message, ToastAndroid.SHORT)
+          }
+          else{
+              dispatch(actionReward(data.bronze,data.silver,data.report))
           }
           console.log('--------got the response---------',resp)
         }).catch((ex) => {

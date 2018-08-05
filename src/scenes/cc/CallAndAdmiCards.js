@@ -4,6 +4,8 @@ import {
   FlatList,
   View,
   ActivityIndicator,
+  link,
+  Linking
 } from 'react-native';
 import styles from '@components/screenStyles/CallAndAdmiCards.styles'
 import {images} from '../../theme'
@@ -13,6 +15,7 @@ import Loader from '@components/Loader'
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
+import RNFetchBlob from 'react-native-fetch-blob';
 class CallAndAdmiCards extends Component{
   constructor(props){
     super(props);
@@ -25,6 +28,31 @@ class CallAndAdmiCards extends Component{
         this.setState({dataSource:this.props.notifyData})
       })
   }
+  _gotoUrl(_url){
+    alert(_url)
+    Linking.openURL(_url);
+  }
+  _getPdf(url){
+    RNFetchBlob
+        .config({
+            addAndroidDownloads : {
+                useDownloadManager : true, // <-- this is the only thing required
+                // Optional, override notification setting (default to true)
+                notification : true,
+                // Optional, but recommended since android DownloadManager will fail when
+                // the url does not contains a file extension, by default the mime type will be text/plain
+                mime : 'application/pdf',
+                description : 'File downloaded by download manager.'
+            }
+        })
+        .fetch('GET', url)
+        .then((resp) => {
+          // the path of downloaded file
+          alert(  resp.path())
+          resp.path()
+        })
+  }
+
   render(){
     console.log('hello data',this.state.dataSource);
     return(
@@ -33,10 +61,13 @@ class CallAndAdmiCards extends Component{
         <Loader/>:
         <FlatList
             data={this.state.dataSource}
-          renderItem={({item})=>(<NotifyRecord data={item}/>)}
+          renderItem={({item})=>(<NotifyRecord
+            gotoUrl={()=>{this._gotoUrl(item.url)}}
+            getPdf={()=>{this._getPdf(item.pdf)}}
+             data={item}/>)}
           keyExtractor={(item,index)=>index.toString()}
-
         />}
+
       </View>
     )
   }

@@ -12,7 +12,8 @@ export default StyleSheet.create({
   },
   subContainer:{
     backgroundColor: colors.white,
-    flex:1
+    flex:1,
+    padding: 8,
   },
   rowContainer:{
     flexDirection: 'row',
@@ -74,6 +75,7 @@ export default StyleSheet.create({
     color: colors.appColor,
     ...bs.font.vac_headFont,
     margin: 8,
+    textAlign: 'center'
   },
   submitContainer:{
     height: 48,

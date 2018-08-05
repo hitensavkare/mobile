@@ -10,15 +10,17 @@ class MainTestHeader extends Component{
 
       <Header style={styles.header} androidStatusBarColor={colors.appColor}>
         <View style={styles.headerView}>
-      { /* <TouchableOpacity style={styles.backButton} >
-        <Image source={images.iconBack} style={styles.mdMenuColor}/>
-      </TouchableOpacity>*/}
+        
+          <View style={styles.middleTextView}>
           <Text style={styles.headerText}>
             {this.props.title}
           </Text>
-          {/*<TouchableOpacity style={{flex:0.5}} onPress={this.props.onPress}>
-          <Icon name='md-menu' style={styles.mdMenuColorView}/>
-        </TouchableOpacity>*/}
+          </View>
+          {this.props.rightIcon==='true'?
+            <TouchableOpacity style={{flex:0.5,alignItems:'flex-end',justifyContent:'flex-end'}} onPress={this.props.onPress}>
+            <Text style={styles.tryText}>Try Again</Text>
+          </TouchableOpacity>:null}
+
         </View>
       </Header>
 
@@ -40,7 +42,7 @@ const styles=StyleSheet.create({
     fontFamily:appFonts.QuicksandBold,
     fontSize: 20,
     color: colors.appColor,
-    flex: 3
+    alignSelf: 'center'
   },
   mdMenuColor:{
     marginRight:'5%',
@@ -52,14 +54,22 @@ const styles=StyleSheet.create({
     flex:1,
     marginLeft:16,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
+    justifyContent: 'center'
   },
 
   mdMenuColorView:{
     color:colors.appColor,
     marginRight:16,
     marginTop: 4,
+  },
+  tryText:{
+    color:colors.appColor,
+  },
+  middleTextView:{
+    flex:3,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 
 });

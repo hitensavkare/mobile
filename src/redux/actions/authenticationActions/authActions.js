@@ -12,12 +12,6 @@ export function startRequest(){
     type: constants.START_REQUEST
   };
 }
-export function startAuth(isLoading){
-  return{
-    type: constants.START_AUTH,
-    isLoading
-  };
-}
 export function actionGuestUser(){
   return{
     type: constants.GUEST_USER
@@ -29,11 +23,18 @@ export function actionSetError(error){
     error,
   };
 }
+export function authStarted(isLoading){
+  return{
+    type:constants.START_AUTH,
+    isLoading,
+  }
+}
 
-export function actionUserLogin(userData){
+export function actionUserLogin(userData,isLoading){
   return{
     type: constants.USER_LOGIN,
     userData,
+    isLoading,
   };
 }
 export function actionForgotPassword(){
@@ -198,7 +199,7 @@ export function fbAuth(token){
       }
       else{
         AccessToken.getCurrentAccessToken().then((data) => {
-          //dispatch(authStarted(true));
+          dispatch(authStarted(true));
          const { accessToken } = data
          console.log('--------token obtain------',accessToken);
          fetch('https://graph.facebook.com/v2.5/me?fields=picture.height(2048),birthday,name,email,gender&access_token=' + accessToken)
@@ -213,8 +214,8 @@ export function fbAuth(token){
              AsyncSetting.setId(resp._id)
                AsyncSetting.setUrl(resp.url)
               // alert(resp.url)
-             dispatch(actionUserLogin(resp))
-              Actions.MainScreen();
+             dispatch(actionUserLogin(resp,false))
+              Actions.MainScreen({type:'reset'});
            })
 
          })
@@ -232,7 +233,7 @@ export function fbAuth(token){
 //Google authentication
 export function googleAuth(token){
   return (dispatch) => {
-//dispatch(authStarted(false,true));
+dispatch(authStarted(true));
 GoogleSignin.configure({
       //iosClientId:'279628207670-7782ko2r54602h3lajalu7t18hoq6q4o.apps.googleusercontent.com',
       webClientId:'111940073926-eo8tv8galghggqcvli2qko45lcu8g52q.apps.googleusercontent.com'
@@ -240,7 +241,7 @@ GoogleSignin.configure({
 
        GoogleSignin.signIn()
             .then((user) => {
-              
+
               console.log('----google response-------------',user);
               //dispatch(authSuccess(true,user.name,user.photo,true));
               const dataT={pushToken:token,deviceId:DeviceInfo.getUniqueID(),fullname:user.name,mail:user.email,profilepic:user.photo,gender:null,birthDay:null,provider:'Google'}
@@ -252,7 +253,7 @@ GoogleSignin.configure({
                 AsyncSetting.setId(resp._id)
                   AsyncSetting.setUrl(resp.url)
                 //  alert(resp.url)
-                dispatch(actionUserLogin(resp))
+                dispatch(actionUserLogin(resp,false))
                  Actions.MainScreen({type:'reset'});
               })
 

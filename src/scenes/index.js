@@ -22,13 +22,13 @@ class MainScreen extends Component{
   constructor(props){
     super(props);
     this.state={
-      page:'home'
+      page:this.props.pageName===null || this.props.pageName===undefined?'home':this.props.pageName
     }
   }
 
   _tabbedNavigation(){
     switch(this.state.page){
-      case 'home':return(<Home><Text>hello</Text></Home>)
+      case 'home':return(<Home/>)
       break;
       case 'discuss':return(<Discuss/>)
       break;

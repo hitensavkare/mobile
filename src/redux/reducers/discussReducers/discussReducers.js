@@ -4,6 +4,9 @@ const intialState={
   postedQuestionDataSource:[],
   commentData:[],
   isAccepted:null,
+  bronze:0,
+  silver:0,
+  report:0,
 };
 
 export const discussReducer=createReducer(intialState,{
@@ -44,6 +47,10 @@ export const discussReducer=createReducer(intialState,{
  },
  [constants.POST_REWARD_REPORT](state,action){
    return Object.assign({},state,{
+     bronze:action.bronze,
+     silver:action.silver,
+     report:action.report
    })
  },
+
 });

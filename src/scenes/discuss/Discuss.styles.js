@@ -195,4 +195,13 @@ subHeadingText:{
   ...bs.font.vac_SubcontentFontHeading,
   fontSize: 12,
 },
+flatListView:{
+  flex:4,
+
+},
+flatListViewShort:{
+  flex:3.5,
+    marginBottom:60
+
+}
 });

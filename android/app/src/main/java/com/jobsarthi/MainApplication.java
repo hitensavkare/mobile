@@ -3,13 +3,14 @@ package com.jobsarthi;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.horcrux.svg.SvgPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -37,13 +38,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativePushNotificationPackage(),
+            new RNGoogleSigninPackage(),
+            new RNAdMobPackage(),
             new PickerPackage(),
             new SvgPackage(),
-            new RNGoogleSigninPackage(),
             new FBSDKPackage(mCallbackManager),
             new RNDeviceInfo(),
             new RNFetchBlobPackage(),
-            new ReactNativePushNotificationPackage(),
             new VectorIconsPackage()
       );
     }

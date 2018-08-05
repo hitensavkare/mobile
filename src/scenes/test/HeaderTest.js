@@ -8,7 +8,7 @@ class HeaderTest extends Component{
     return(
       <Header style={styles.header} androidStatusBarColor={colors.appColor}>
         <View style={styles.headerView}>
-          <TouchableOpacity style={styles.backButton} onPress={this.props.onPress}>
+          <TouchableOpacity style={styles.backButton} onPress={()=>Actions.pop()}>
           <Image source={images.iconBack} style={styles.mdMenuColor}/>
         </TouchableOpacity>
           <Text style={styles.headerText}>

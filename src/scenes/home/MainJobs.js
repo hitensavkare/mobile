@@ -22,18 +22,21 @@ class Home extends Component{
     this.state={
       page:'home',
       dataSource:null,
+      loading:false
     }
   }
   componentDidMount(){
   //  alert(this.props.category)
     if(this.props.category===undefined){
+    this.setState({loading:true})
     this.props.getAds({category:this.props.title}).then(()=>{
-      this.setState({dataSource:this.props.adsSource})
+      this.setState({dataSource:this.props.adsSource,loading:false})
     })
   }
   else{
+    this.setState({loading:true})
     this.props.getSaerchData({state:this.props.title,category:this.props.category}).then(()=>{
-        this.setState({dataSource:this.props.adsSource})
+        this.setState({dataSource:this.props.adsSource,loading:false})
     })
   }
   }
@@ -44,6 +47,7 @@ class Home extends Component{
     Linking.openURL(_url);
   }
   _getPdf(url){
+    alert(url)
     RNFetchBlob
         .config({
             addAndroidDownloads : {
@@ -59,6 +63,7 @@ class Home extends Component{
         .fetch('GET', url)
         .then((resp) => {
           // the path of downloaded file
+          alert(  resp.path())
           resp.path()
         })
   }
@@ -68,7 +73,8 @@ class Home extends Component{
       <View style={styles.container}>
         <Statusbar/>
         <HeaderHome pageName='Jobs' onPress={()=>{Actions.pop()}}/>
-        {this.state.dataSource===null?<Loader/>:
+        <Loader
+           loading={this.state.loading} />
           <FlatList
             data={this.state.dataSource}
             renderItem={({item})=>(<JobCard item={item}
@@ -79,7 +85,7 @@ class Home extends Component{
             keyExtractor={(item,index)=>index.toString()}
             initialNumToRender={3}
           />
-        }
+
 
         </View>
     )

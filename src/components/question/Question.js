@@ -22,8 +22,8 @@ constructor(props){
   console.log('hey props',this.props.data);
   }
 
-_gotoComment(id,isAccepted){
-  this.props._gotoCommentScreen(id,isAccepted)
+_gotoComment(id,isAccepted,questioneriesId){
+  this.props._gotoCommentScreen(id,isAccepted,questioneriesId)
 }
   render(){
     const data=this.props.data
@@ -44,10 +44,10 @@ _gotoComment(id,isAccepted){
 
           </View>
           <View style={styles.commentOptionContainer}>
-            <TouchableOpacity style={{marginRight:16}}>
-              <Image source={images.likesActive} style={{height:25,width:25}}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={{marginRight:16}} onPress={()=>this._gotoComment(data._id,data.isAccepted)}>
+            <View style={{marginRight:16}}>
+              <Text style={styles.viewMoretext}>{data.points} Points</Text>
+            </View>
+            <TouchableOpacity style={{marginRight:16}} onPress={()=>this._gotoComment(data._id,data.isAccepted,data.questioneriesId)}>
               <Image source={images.iconComment} style={{height:25,width:25}}/>
             </TouchableOpacity>
 

@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   View,
-  ActivityIndicator,
+  Modal,
+  ActivityIndicator
 } from 'react-native';
-import styles from './DrawerView.styles'
-
-const Loader=(()=>{
-  return(
-  <View style={{justifyContent:'center',alignItems:'center',flex: 1}}>
-  <ActivityIndicator size="large" color="#2196F3" /></View>
-)
+const Loader = props => {
+  const {
+    loading,
+    ...attributes
+  } = props;
+return (
+    <Modal
+      transparent={true}
+      animationType={'none'}
+      onRequestClose={() => null}
+      visible={loading}>
+      <View style={{justifyContent:'center',alignItems:'center',flex: 1}}>
+      <ActivityIndicator size="large" color="#2196F3" /></View>
+    </Modal>
+  )
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
 })
 
 export default Loader;

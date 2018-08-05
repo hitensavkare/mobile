@@ -56,5 +56,7 @@ const images={
     iconComment:require('../assets/images/comment.jpg'),
     guestImg:require('../assets/images/drawer.jpg'),
     resetPassIcon:require('../assets/images/resetpass.jpg'),
+    iconShare:require('../assets/images/share.jpg')
+
 };
 export default images;

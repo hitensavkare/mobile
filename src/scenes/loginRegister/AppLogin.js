@@ -61,6 +61,7 @@ class AppLogin extends Component{
    })
   }
   render(){
+      //alert('hey user ' +this.props.isLoading)
     return(
       <View  style={styles.container}>
           <Statusbar/>
@@ -85,7 +86,8 @@ class AppLogin extends Component{
                  </Text>
                </Button>
              </View>
-               {this.state.loading===true?<Loader/>:null}
+             <Loader
+             loading={this.props.isLoading} />
              <View style={styles.forgetPassView}>
                <Text style={styles.forgetPass} onPress={() => this._goToForgerPassword()}>Forgot Password?</Text>
              </View>
@@ -146,7 +148,7 @@ class AppLogin extends Component{
 
 const mapStateToProps=state=>{
   return{
-   isLoading:state.authenticationReducer.isLoading
+   isLoading:state.authenticationReducer.loading
   }
 }
 function mapDispatchToProps(dispatch){

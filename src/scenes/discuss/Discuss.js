@@ -14,6 +14,7 @@ import Question from '@components/question'
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
+import Loader from '@components/Loader'
 class Discuss extends Component{
 constructor(props){
   super(props);
@@ -26,15 +27,17 @@ constructor(props){
 componentDidMount(){
     AsyncStorage.getItem('id').then((value)=>{
       this.setState({_id:value})
-      })
-      const data={id:this.state._id,fromRange:0}
+      const data={id:value,fromRange:0}
+      this.setState({loading:true})
       this.props.getPostedQuestion(data).then(()=>{
-          this.setState({dataSource:this.props.postedQuestionSource})
+          this.setState({dataSource:this.props.postedQuestionSource,loading:false})
       })
+      })
+
 
 }
 _gotoQuestionScreen(value){
-  if(value===null){
+  if(value===null || value==='null'){
     Actions.Login()
   }
   else{
@@ -46,20 +49,24 @@ _changeCommentSectionState(visible){
     isCommentVisible:visible,
   })
 }
-_gotoCommentScreen=(id,isAccept)=>{
-  Actions.Comments({questionPostId:id,isAcceptFlag:isAccept})
+_gotoCommentScreen=(id,isAccept,questionariesId)=>{
+  Actions.Comments({questionPostId:id,isAcceptFlag:isAccept,questionariesId:questionariesId})
 }
 
   render(){
     console.log('hey data',this.state.dataSource.length);
     return(
 
-      <View style={styles.container}>
+      <View style={[styles.container]}>
+        <Loader
+           loading={this.state.loading} />
+           <View style={{paddingBottom:5}}>
         <FlatList
           data={this.state.dataSource}
           renderItem={({item})=>(<Question data={item} _gotoCommentScreen={this._gotoCommentScreen}/>)}
           keyExtractor={(item,index)=>index.toString()}
         />
+        </View>
         <View style={styles.float}>
           <TouchableOpacity style={styles.floatView} onPress={()=>{this._gotoQuestionScreen(this.state._id)}}>
             <Text style={styles.subHeadingText}>NEW</Text>

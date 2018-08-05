@@ -7,7 +7,8 @@ import {
   Picker,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native';
 import {Drawer,Button} from 'native-base'
 import {Actions} from 'react-native-router-flux';
@@ -146,6 +147,17 @@ else if(flag==='opt4'){
 console.log('hey your score is=',scoreCalculate)
 }
 submitTest(){
+  Alert.alert(
+  'Confirmation',
+  'Are you sure want to submit the test?',
+  [
+    {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+    {text: 'Yes', onPress: () => this._generateResult()},
+  ],
+  { cancelable: false }
+)
+}
+_generateResult(){
   result=0;
   for(let i=0;i<scoreCalculate.length;i++){
     result=result+scoreCalculate[i];

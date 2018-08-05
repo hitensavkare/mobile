@@ -24,6 +24,7 @@ class Question extends Component{
       points:'',
       question:'',
       flag:null,
+      loading:false,
     }
   }
   componentWillMount(){
@@ -35,14 +36,19 @@ class Question extends Component{
     }
     else{
       const data={val:this.state.points,catId:this.state.question_category,question:this.state.question,userid:this.props.userId}
-      this.props.postQuestion(data)
+      this.setState({loading:true})
+      this.props.postQuestion(data).then(()=>{
+        this.setState({loading:false})
+      })
     }
 }
   render(){
   return(
     <View style={styles.container}>
       <Statusbar/>
-      <HeaderDiscuss pageName="Ask Question" rightButton='POST' postAction={this._postQuestion}/>
+      <HeaderDiscuss pageName="Ask Question" rightButton='POST' onPress={()=>Actions.pop()} postAction={this._postQuestion}/>
+      <Loader
+         loading={this.state.loading} />
       <View style={styles.subContainer}>
 
         <Picker
@@ -69,8 +75,9 @@ class Question extends Component{
              style={styles.QuestionFont}
           />
           <TextInput
-            onChangeText={(points)=>{this.setState({points})}}
+            onChangeText={(points)=>{this.setState({points:points.replace(/[^0-9]/g, '')})}}
             keyboardType='numeric'
+            value={this.state.points}
             placeholder="Points for this questions?"
             underlineColorAndroid={colors.appColor}
             maxLength = {450}

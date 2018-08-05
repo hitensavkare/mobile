@@ -4,7 +4,8 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  CheckBox,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import styles from '../DrawerScreen/DrawerScreen.styles'
@@ -21,7 +22,8 @@ class ResetPassword extends Component{
     this.state={
       old:null,
       new:null,
-      isRender:false
+      isRender:false,
+      checked:false,
     }
   }
   _sendPassword(){
@@ -40,24 +42,31 @@ class ResetPassword extends Component{
   }
 
   render(){
+    const{checked}=this.state;
   return(
     <View style={styles.container}>
         <Statusbar/>
         <HeaderDrawer onPress={()=>{Actions.pop()}} headerTitle="Reset"/>
         <View style={styles.subContainer}>
+          <View>
+            <CheckBox
+              value={this.state.checked}
+              onValueChange={() => this.setState({ checked: !this.state.checked })}
+              />
+          </View>
           <Text style={styles.fontHeading}>
-          Reset your Password here
+        I want to set my existing fb/google account password for this application
           </Text>
           <TextInput
             onChangeText={(value)=>{this.setState({old:value})}}
-            placeholder="Old Password"
+            placeholder={checked===true?'New Password':"Old Password"}
             underlineColorAndroid={colors.appColor}
             maxLength = {32}
             multiline = {true}
             style={styles.textinput}/>
             <TextInput
               onChangeText={(value)=>{this.setState({new:value})}}
-              placeholder="New Password"
+              placeholder={checked===true?'Confirm Password':"New Password"}
               underlineColorAndroid={colors.appColor}
               maxLength = {32}
               multiline = {true}

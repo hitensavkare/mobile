@@ -15,16 +15,20 @@ import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 
 class Result extends Component{
+  _gotoEducationTab(){
+      Actions.MainScreen({type:'reset',pageName:'test'});
+  }
   render(){
+
   return(
     <View style={{backgroundColor:'white',flex:1}}>
       <Statusbar/>
-    <MainTestHeader title="Result"/>
+    <MainTestHeader title="Result" rightIcon="true" onPress={()=>{this._gotoEducationTab()}}/>
       <ScrollView>
 
 
       <ProgressCircle
-                 style={ { height: 200} }
+                 style={ { height: 150,marginTop:8} }
                  progress={ this.props.result/25 }
                  progressColor={colors.appColor}
                  startAngle={ -Math.PI * 1 }
@@ -43,7 +47,7 @@ class Result extends Component{
           </View>
           {this.props.practiceQuestion.map((data,index)=>{
             return(
-              <View key={index} style={styles.ansKeyContainer}>
+              <View key={index} style={[styles.ansKeyContainer,{marginLeft:8,marginRight:8}]}>
                 <View style={styles.queNoContainer}>
                   <Text style={styles.ansText}>
                     {index+1}

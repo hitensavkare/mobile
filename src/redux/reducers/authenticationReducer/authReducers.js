@@ -30,6 +30,7 @@ export const authenticationReducer=createReducer(intialState,{
 [constants.USER_LOGIN](state,action){
   return Object.assign({},state,{
     userData:action.userData,
+    loading:action.isLoading,
   })
 },
 [constants.FORGOT_PASSWORD](state,action){

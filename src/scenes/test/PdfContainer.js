@@ -60,15 +60,15 @@ RNFetchBlob
             this.state.dataSource.map((data,key)=>{
               //Code for rendering the question paper sets
               return(
-              <View key={key} style={styles.rowContainer}>
-                <TouchableOpacity onPress={()=>{this._downLoadPaper(data.url)}}  style={styles.imageColumnContainer}>
+              <TouchableOpacity key={key} style={styles.rowContainer} onPress={()=>{this._downLoadPaper(data.url)}}>
+                <View style={styles.imageColumnContainer}>
                   <Image source={images.introTest} style={{height:40,width:40}}/>
-                </TouchableOpacity>
+                </View>
                 <View style={styles.TextColumnContainer}>
                 <Text style={styles.textHeader}>{data.heading}</Text>
                 <Text style={styles.subText}>Posted on {data.created}</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           )
             })
 
