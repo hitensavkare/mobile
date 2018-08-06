@@ -20,6 +20,7 @@ import {connect} from 'react-redux';
 let  token=null;
 import keys from '../../app/keys'
 var PushNotification = require('react-native-push-notification');
+
 import Loader from '@components/Loader'
 class AppLogin extends Component{
   constructor(props){

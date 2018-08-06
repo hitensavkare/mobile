@@ -3,8 +3,8 @@ package com.jobsarthi;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.horcrux.svg.SvgPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
@@ -38,9 +38,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAdMobPackage(),
             new ReactNativePushNotificationPackage(),
             new RNGoogleSigninPackage(),
-            new RNAdMobPackage(),
             new PickerPackage(),
             new SvgPackage(),
             new FBSDKPackage(mCallbackManager),
