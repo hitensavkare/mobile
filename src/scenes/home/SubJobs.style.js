@@ -3,6 +3,7 @@ import {baseStyle as bs,colors,sizes} from '../../theme'
 export default StyleSheet.create({
   container:{
   flex:1,
+
 },
 subContainer:{
 backgroundColor: colors.white,
@@ -78,5 +79,9 @@ imageIcon:{
   width: 32,
   marginRight:8,
   marginLeft:8,
+},
+adContainer:{
+  height: 32,
 }
+
 });

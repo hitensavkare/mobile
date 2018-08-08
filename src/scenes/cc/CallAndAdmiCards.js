@@ -16,6 +16,10 @@ import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import RNFetchBlob from 'react-native-fetch-blob';
+import {Interstitial} from '@app/keys'
+import {
+  AdMobInterstitial,
+} from 'react-native-admob'
 class CallAndAdmiCards extends Component{
   constructor(props){
     super(props);
@@ -33,6 +37,10 @@ class CallAndAdmiCards extends Component{
     Linking.openURL(_url);
   }
   _getPdf(url){
+    AdMobInterstitial.setAdUnitID(Interstitial);
+    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+    AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
+
     RNFetchBlob
         .config({
             addAndroidDownloads : {

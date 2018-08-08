@@ -6,7 +6,8 @@ import {
   View,
   Picker,
   TouchableOpacity,
-  Image
+  Image,
+  FlatList
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import HeaderTest from './HeaderTest'
@@ -17,6 +18,10 @@ import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import Loader from '@components/Loader'
+import {Banner} from '@app/keys'
+import {
+  AdMobBanner,
+} from 'react-native-admob'
 class Years extends Component{
   constructor(props){
     super(props);
@@ -37,24 +42,39 @@ class Years extends Component{
     return(
       <View style={styles.containerTestSeries}>
         <Statusbar/>
+        <View style={{flex:1}}>
+          <View style={{flex:3.5}}>
         <HeaderTest pageName='Years'/>
           {this.state.dataSource===null?<Loader/>:
-            this.state.dataSource.map((data,key)=>{
-              //Code for rendering the question paper sets
-              return(
-              <TouchableOpacity key={key} onPress={()=>{this.getPapers(data.year)}} style={styles.rowContainer}>
-                <View style={styles.imageColumnContainer}>
-                  <Image source={images.introTest} style={{height:40,width:40}}/>
-                </View>
-                <View style={styles.TextColumnContainer}>
-                <Text style={styles.textHeader}>{data.year}</Text>
+              //Code for rendering the question paper sets4
+              <FlatList
+                data={this.state.dataSource}
+                    keyExtractor={(item,index)=>index.toString()}
+                      initialNumToRender={3}
+                renderItem={({item,index}) =>
+                  <TouchableOpacity key={index} onPress={()=>{this.getPapers(item.year)}} style={styles.rowContainer}>
+                    <View style={styles.imageColumnContainer}>
+                      <Image source={images.introTest} style={{height:40,width:40}}/>
+                    </View>
+                    <View style={styles.TextColumnContainer}>
+                    <Text style={styles.textHeader}>{item.year}</Text>
 
-              </View>
-            </TouchableOpacity>
-          )
-            })
-
+                  </View>
+                </TouchableOpacity>
+                }
+              />
     }
+
+  </View>
+  <View style={{flex:0.5,width:'100%',alignItems:'center',justifyContent: 'flex-end'}}>
+      <AdMobBanner
+  adSize="fullBanner"
+  adUnitID={Banner}
+  testDevices={[AdMobBanner.simulatorId]}
+  onAdFailedToLoad={error =>alert(error)}
+  />
+</View>
+</View>
       </View>
     )
   }

@@ -2,6 +2,11 @@ import * as constants from './constants'
 import Api from '../../../app/api'
 import {ToastAndroid} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import {Rewarded_video} from '@app/keys'
+import {Interstitial} from '@app/keys'
+import {
+  AdMobInterstitial,
+} from 'react-native-admob'
 export function startRequest(){
   return{
     type: constants.START_ACTIONS
@@ -40,7 +45,6 @@ export function actionReward(bronze,silver,report){
   }
 }
 export function postQuestion(data){
-  console.log('hey postQuestion',data);
   return (dispatch,getState) => {
       dispatch(startRequest())
       return Api.post(`/postQuestion.php`,data).then(resp => {
@@ -48,6 +52,9 @@ export function postQuestion(data){
             ToastAndroid.show(resp.message, ToastAndroid.SHORT)
         }
         else{
+          AdMobInterstitial.setAdUnitID(Interstitial);
+          AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+          AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
           ToastAndroid.show(resp.message, ToastAndroid.SHORT);
           Actions.pop()
         }

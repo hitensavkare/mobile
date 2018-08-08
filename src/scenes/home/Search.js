@@ -14,7 +14,10 @@ import HeaderHome from './HeaderHome'
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
-import admobIds from '../../common/admobIds'
+import {Interstitial} from '@app/keys'
+import {
+  AdMobInterstitial,
+} from 'react-native-admob'
 class Search extends Component{
   constructor(props){
     super(props);
@@ -24,7 +27,9 @@ class Search extends Component{
     }
   }
   componentDidMount(){
-
+    AdMobInterstitial.setAdUnitID(Interstitial);
+    AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+    AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd());
   }
   _searchData(){
     if(this.state.state==='NA' && this.state.category==='NA'){

@@ -6,7 +6,8 @@ import {
   View,
   Picker,
   TouchableOpacity,
-  Image
+  Image,
+  FlatList
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import HeaderTest from './HeaderTest'
@@ -18,6 +19,10 @@ import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import Loader from '@components/Loader'
 import RNFetchBlob from 'react-native-fetch-blob';
+import {Rewarded_video} from '@app/keys'
+import {
+  AdMobRewarded
+} from 'react-native-admob'
 class PdfContainer extends Component{
   constructor(props){
     super(props);
@@ -26,6 +31,9 @@ class PdfContainer extends Component{
     }
   }
   componentDidMount(){
+    AdMobRewarded.setAdUnitID(Rewarded_video);
+    AdMobRewarded.requestAd().then(() => AdMobRewarded.showAd());
+
   //  alert(this.props.year)
     this.props.getPdfs({pagname:'questionPapers',year:this.props.year}).then(()=>{
       this.setState({dataSource:this.props.pdfData})
@@ -56,23 +64,36 @@ RNFetchBlob
       <View style={styles.containerTestSeries}>
         <Statusbar/>
         <HeaderTest pageName={this.props.year}/>
+        <View style={{flex:1}}>
+          <View style={{flex:3.5}}>
           {this.state.dataSource===null?<Loader/>:
-            this.state.dataSource.map((data,key)=>{
-              //Code for rendering the question paper sets
-              return(
-              <TouchableOpacity key={key} style={styles.rowContainer} onPress={()=>{this._downLoadPaper(data.url)}}>
+            <FlatList
+              data={this.state.dataSource}
+                  keyExtractor={(item,index)=>index.toString()}
+                    initialNumToRender={3}
+              renderItem={({item,index}) =>
+              <TouchableOpacity key={index} style={styles.rowContainer} onPress={()=>{this._downLoadPaper(item.url)}}>
                 <View style={styles.imageColumnContainer}>
                   <Image source={images.introTest} style={{height:40,width:40}}/>
                 </View>
                 <View style={styles.TextColumnContainer}>
-                <Text style={styles.textHeader}>{data.heading}</Text>
-                <Text style={styles.subText}>Posted on {data.created}</Text>
+                <Text style={styles.textHeader}>{item.heading}</Text>
+                <Text style={styles.subText}>Posted on {item.created}</Text>
               </View>
             </TouchableOpacity>
-          )
-            })
-
+              }
+            />
     }
+  </View>
+  <View style={{flex:0.5,width:'100%',alignItems:'center',justifyContent: 'flex-end'}}>
+      <AdMobBanner
+  adSize="fullBanner"
+  adUnitID={Banner}
+  testDevices={[AdMobBanner.simulatorId]}
+  onAdFailedToLoad={error =>alert(error)}
+  />
+</View>
+</View>
       </View>
     )
   }

@@ -26,14 +26,14 @@ class SingleJob extends Component{
     }
   }
   componentDidMount(){
-    this.props.getSingleJob({id:1}).then(()=>{
+    this.props.getSingleJob({id:this.props.jobId}).then(()=>{
       this.setState({
         dataSource:this.props.singleJobResp
       })
     })
   }
   render(){
-
+    console.log(this.state.dataSource);
     return(
       this.state.dataSource===null?
     <Loader/>
@@ -41,7 +41,7 @@ class SingleJob extends Component{
         <Statusbar/>
         <HeaderHome pageName={this.state.dataSource.postname} onPress={()=>{Actions.pop()}}/>
         <View style={styles.subContainer}>
-          {this.state.dataSource.img===null?
+          {this.state.dataSource.img===undefined || this.state.dataSource.img===""?
           <Image source={images.profileImage}  style={styles.vacancy_logo}/>
         :<Image source={{uri:this.state.dataSource.img}}  style={styles.vacancy_logo}/>}
       </View>

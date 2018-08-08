@@ -23,6 +23,10 @@ import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import Loader from '@components/Loader'
+import {Banner} from '@app/keys'
+import {
+  AdMobBanner,
+} from 'react-native-admob'
 let scoreCalculate=[];
 let result=0
 class MainTest extends Component{
@@ -181,10 +185,12 @@ console.log('hello',this.state.dataSource)
       <MainTestHeader title="Examination"/>
 
       <View style={styles.timeContainer}>
-          <Image source={images.iconTime} style={{height: 60,width: 60}}/>
-          <Text style={styles.watchText}>
-            11:20:50
-        </Text>
+        <AdMobBanner
+    adSize="fullBanner"
+    adUnitID={Banner}
+    testDevices={[AdMobBanner.simulatorId]}
+    onAdFailedToLoad={error =>alert(error)}
+    />
       </View>
       <View style={styles.questionSetContainer}>
         <ScrollView style={{backgroundColor:'white',flex:1}}>

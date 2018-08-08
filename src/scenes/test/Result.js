@@ -13,8 +13,15 @@ import Statusbar from '../../components/Statusbar'
 import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
-
+import {Rewarded_video} from '@app/keys'
+import {
+  AdMobRewarded
+} from 'react-native-admob'
 class Result extends Component{
+  componentDidMount(){
+    AdMobRewarded.setAdUnitID(Rewarded_video);
+    AdMobRewarded.requestAd().then(() => AdMobRewarded.showAd());
+  }
   _gotoEducationTab(){
       Actions.MainScreen({type:'reset',pageName:'test'});
   }

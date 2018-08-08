@@ -16,6 +16,10 @@ import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import Loader from '@components/Loader'
 import RNFetchBlob from 'react-native-fetch-blob';
+import {Banner} from '@app/keys'
+import {
+  AdMobBanner,
+} from 'react-native-admob'
 class Home extends Component{
   constructor(props){
     super(props);
@@ -73,6 +77,8 @@ class Home extends Component{
       <View style={styles.container}>
         <Statusbar/>
         <HeaderHome pageName='Jobs' onPress={()=>{Actions.pop()}}/>
+        <View style={{flex:1}}>
+          <View style={{flex:3.5}}>
         <Loader
            loading={this.state.loading} />
           <FlatList
@@ -85,8 +91,16 @@ class Home extends Component{
             keyExtractor={(item,index)=>index.toString()}
             initialNumToRender={3}
           />
-
-
+        </View>
+        <View style={{flex:0.5,width:'100%',alignItems:'center',justifyContent: 'flex-end'}}>
+            <AdMobBanner
+        adSize="fullBanner"
+        adUnitID={Banner}
+        testDevices={[AdMobBanner.simulatorId]}
+        onAdFailedToLoad={error =>alert(error)}
+        />
+      </View>
+        </View>
         </View>
     )
   }

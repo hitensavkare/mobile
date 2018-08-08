@@ -18,6 +18,10 @@ import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import Loader from '@components/Loader'
+import {Banner} from '@app/keys'
+import {
+  AdMobBanner,
+} from 'react-native-admob'
 class PrevQuestionPaper extends Component{
   constructor(props){
     super(props);
@@ -53,6 +57,8 @@ else{
       <View style={styles.containerTestSeries}>
         <Statusbar/>
         <HeaderTest pageName='Question Paper Sets'/>
+        <View style={{flex:1}}>
+          <View style={{flex:3.5}}>
           {this.state.dataSource===null?<Loader/>:
             this.state.dataSource.map((data,key)=>{
               //Code for rendering the question paper sets
@@ -70,6 +76,17 @@ else{
             })
 
     }
+  </View>
+
+    <View style={{flex:0.5,width:'100%',marginBottom:-5}}>
+        <AdMobBanner
+    adSize="fullBanner"
+    adUnitID={Banner}
+    testDevices={[AdMobBanner.simulatorId]}
+    onAdFailedToLoad={error =>alert(error)}
+    />
+  </View>
+</View>
       </View>
     )
   }

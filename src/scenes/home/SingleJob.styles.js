@@ -7,13 +7,14 @@ export default StyleSheet.create({
 },
 subContainer:{
   marginTop: 8,
-justifyContent: 'center',
-alignItems: 'center',
+  alignItems: 'center',
+  justifyContent:'center'
 
 },
 vacancy_logo:{
-width: '100%',
-resizeMode: 'cover',
+  height:150,
+  width: 150,
+   resizeMode:'cover',
 borderRadius: 8,
 },
 recordContainer:{

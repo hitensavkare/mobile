@@ -7,7 +7,8 @@ import {
   Picker,
   TouchableOpacity,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import HeaderTest from './HeaderTest'
@@ -18,6 +19,10 @@ import {bindActionCreators} from  'redux';
 import {ActionCreators} from '../../redux/actions';
 import {connect} from 'react-redux';
 import Loader from '@components/Loader'
+import {Banner} from '@app/keys'
+import {
+  AdMobBanner,
+} from 'react-native-admob'
 class TestList extends Component{
   constructor(props){
     super(props);
@@ -48,23 +53,37 @@ class TestList extends Component{
       <View style={styles.containerTestSeries}>
         <Statusbar/>
         <HeaderTest pageName='Test Series'/>
+        <View style={{flex:1}}>
+          <View style={{flex:3.5}}>
         {this.state.dataSource.length<=0?<Loader/>:
-        this.state.dataSource.map((data,index)=>{
-          return(
-
-            <TouchableOpacity key={index} onPress={()=>{this._gotoInstruction(data._id)}} style={styles.rowContainer}>
+          <FlatList
+            data={this.state.dataSource}
+                keyExtractor={(item,index)=>index.toString()}
+                  initialNumToRender={3}
+            renderItem={({item,index}) =>
+            <TouchableOpacity key={index} onPress={()=>{this._gotoInstruction(item._id)}} style={styles.rowContainer}>
               <View style={styles.imageColumnContainer}>
                 <Image source={images.introTest} style={{height:40,width:40}}/>
               </View>
               <View style={styles.TextColumnContainer}>
-            <Text style={styles.textHeader}>{data.heading}</Text>
-              <Text style={styles.subText}>{data.created}</Text>
+            <Text style={styles.textHeader}>{item.heading}</Text>
+              <Text style={styles.subText}>{item.created}</Text>
           </View>
           </TouchableOpacity>
-          )
-        })
-      }
+            }
+          />
 
+      }
+    </View>
+    <View style={{flex:0.5,width:'100%',alignItems:'center',justifyContent: 'flex-end'}}>
+        <AdMobBanner
+    adSize="fullBanner"
+    adUnitID={Banner}
+    testDevices={[AdMobBanner.simulatorId]}
+    onAdFailedToLoad={error =>alert(error)}
+    />
+  </View>
+</View>
       </View>
     )
   }

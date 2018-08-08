@@ -9,6 +9,10 @@ import {
   Image,
   FlatList
 } from 'react-native';
+import {
+  AdMobBanner,
+} from 'react-native-admob'
+import {Banner} from '@app/keys'
 import {Actions} from 'react-native-router-flux';
 import styles from './SubJobs.style'
 import {images} from '../../theme'
@@ -36,23 +40,40 @@ class SubJobs extends Component{
     })
   }
   _getId(_id){
-    Actions.SingleJob()
-//    alert(_id )
+    Actions.SingleJob({jobId:_id})
   }
   render(){
+
       return(
       <View style={styles.container}>
           <Statusbar />
         <HeaderHome pageName='Sub Jobs' onPress={()=>{Actions.pop()}}/>
-        {this.state.dataSource===null?<Loader/>:
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({item})=>(<JobCard item={item} onPress={()=>this._getId(item._id)}/>)}
-          keyExtractor={(item,index)=>index.toString()}
-          initialNumToRender={3}
-        />
-}
+        <View style={{flex:1}}>
+          <View style={{flex:3.5}}>
+            {this.state.dataSource===null?<Loader/>:
+            <FlatList
+              data={this.state.dataSource}
+              renderItem={({item})=>(<JobCard item={item} onPress={()=>this._getId(item._id)}/>)}
+              keyExtractor={(item,index)=>index.toString()}
+              initialNumToRender={3}
+            />
+    }
+          </View>
+          <View style={{flex:0.5,width:'100%',marginBottom:-5}}>
+              <AdMobBanner
+          adSize="fullBanner"
+          adUnitID={Banner}
+          testDevices={[AdMobBanner.simulatorId]}
+          onAdFailedToLoad={error =>alert(error)}
+          />
         </View>
+            </View>
+
+
+
+        </View>
+
+
     )
   }
 }
